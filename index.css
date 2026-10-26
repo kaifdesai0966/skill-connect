@@ -826,6 +826,77 @@ select {
   box-shadow: none !important;
 }
 
+/* ── Email Input with Icon ── */
+.input-icon-wrap {
+  position: relative;
+  display: flex;
+  align-items: stretch;
+  border-radius: var(--radius);
+  overflow: hidden;
+  border: 1px solid var(--border-subtle);
+  background: rgba(255, 255, 255, 0.04);
+  transition: var(--transition);
+}
+
+.input-icon-wrap:focus-within {
+  border-color: var(--orange);
+  box-shadow: 0 0 0 3px rgba(255, 107, 0, 0.08);
+}
+
+.input-icon-wrap .input-icon {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-muted);
+  pointer-events: none;
+  transition: var(--transition);
+  flex-shrink: 0;
+}
+
+.input-icon-wrap:focus-within .input-icon {
+  color: var(--orange);
+}
+
+.input-icon-wrap input {
+  border: none !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  padding-left: 40px !important;
+  flex: 1;
+}
+
+/* ── Validation Error ── */
+.input-error {
+  display: none;
+  font-size: 0.72rem;
+  font-weight: 500;
+  color: #EF4444;
+  margin-top: -2px;
+  padding-left: 2px;
+}
+
+.input-error.visible {
+  display: block;
+  animation: fadeInUp 0.2s ease;
+}
+
+.input-group.error .input-icon-wrap,
+.input-group.error .password-input {
+  border-color: #EF4444;
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.08);
+}
+
+.input-group.error .input-icon-wrap:focus-within,
+.input-group.error .password-input:focus-within {
+  border-color: #EF4444;
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.12);
+}
+
+.input-group.error .input-icon {
+  color: #EF4444;
+}
+
 .password-input {
   display: flex;
   align-items: stretch;

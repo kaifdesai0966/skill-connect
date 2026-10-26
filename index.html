@@ -156,27 +156,31 @@
         <div class="tab-indicator"></div>
       </div>
 
-      <!-- ═══ LOG IN FORM ═══ -->
-      <form class="modal-form" id="form-signin">
+      <!-- ═══ LOG IN FORM (Email Based) ═══ -->
+      <form class="modal-form" id="form-signin" novalidate>
         <div class="modal-role-indicator" id="signin-role-indicator">
           <span class="role-indicator-dot"></span>
           <span id="signin-role-label">Worker Portal</span>
         </div>
 
         <div class="input-group">
-          <label for="signin-phone">Mobile Number</label>
-          <div class="phone-input">
-            <span class="country-code">+91</span>
-            <input type="tel" id="signin-phone" placeholder="Enter your phone number" maxlength="10"
-              autocomplete="tel" />
+          <label for="signin-email">Email ID</label>
+          <div class="input-icon-wrap">
+            <svg class="input-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="2">
+              <rect x="2" y="4" width="20" height="16" rx="2" />
+              <path d="M22 7l-10 7L2 7" />
+            </svg>
+            <input type="email" id="signin-email" placeholder="name@example.com" autocomplete="email" required />
           </div>
+          <span class="input-error" id="signin-email-error">Please enter a valid email address</span>
         </div>
 
         <div class="input-group">
-          <label for="signin-password">Password / PIN</label>
+          <label for="signin-password">Password</label>
           <div class="password-input">
-            <input type="password" id="signin-password" placeholder="Enter password or 4-digit PIN"
-              autocomplete="current-password" />
+            <input type="password" id="signin-password" placeholder="Enter your password"
+              autocomplete="current-password" required />
             <button type="button" class="toggle-password" id="toggle-password-signin" aria-label="Show password">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
@@ -188,7 +192,7 @@
 
         <div class="form-links-row">
           <button type="button" class="link-btn" id="btn-forgot-password">Forgot Password?</button>
-          <button type="button" class="link-btn" id="btn-otp-login">Log in with OTP instead</button>
+          <button type="button" class="link-btn" id="btn-magic-link">Sign in with Magic Link</button>
         </div>
 
         <button type="submit" class="btn btn-submit" id="btn-signin-submit">
@@ -203,8 +207,8 @@
         </p>
       </form>
 
-      <!-- ═══ SIGN UP / REGISTER FORM ═══ -->
-      <form class="modal-form hidden" id="form-signup">
+      <!-- ═══ SIGN UP / REGISTER FORM (Email Based) ═══ -->
+      <form class="modal-form hidden" id="form-signup" novalidate>
         <div class="modal-role-indicator" id="signup-role-indicator">
           <span class="role-indicator-dot"></span>
           <span id="signup-role-label">Registering as Worker</span>
@@ -213,28 +217,46 @@
         <!-- Shared Fields -->
         <div class="input-group">
           <label for="signup-name" id="signup-name-label">Full Name</label>
-          <input type="text" id="signup-name" placeholder="Enter your full name" autocomplete="name" />
+          <input type="text" id="signup-name" placeholder="Enter your full name" autocomplete="name" required />
         </div>
 
         <div class="input-group">
-          <label for="signup-phone">Mobile Number</label>
-          <div class="phone-input">
-            <span class="country-code">+91</span>
-            <input type="tel" id="signup-phone" placeholder="Enter your phone number" maxlength="10"
-              autocomplete="tel" />
+          <label for="signup-email">Email ID</label>
+          <div class="input-icon-wrap">
+            <svg class="input-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="2">
+              <rect x="2" y="4" width="20" height="16" rx="2" />
+              <path d="M22 7l-10 7L2 7" />
+            </svg>
+            <input type="email" id="signup-email" placeholder="name@example.com" autocomplete="email" required />
+          </div>
+          <span class="input-error" id="signup-email-error">Please enter a valid email address</span>
+        </div>
+
+        <div class="input-group">
+          <label for="signup-password">Create Password</label>
+          <div class="password-input">
+            <input type="password" id="signup-password" placeholder="Min. 6 characters" minlength="6"
+              autocomplete="new-password" required />
+            <button type="button" class="toggle-password" id="toggle-password-signup" aria-label="Show password">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                <circle cx="12" cy="12" r="3" />
+              </svg>
+            </button>
           </div>
         </div>
 
         <div class="input-group">
           <label for="signup-location" id="signup-location-label">City / Pincode</label>
-          <input type="text" id="signup-location" placeholder="Enter area name or 6-digit pincode" />
+          <input type="text" id="signup-location" placeholder="Enter area name or 6-digit pincode" required />
         </div>
 
         <!-- ═══ Worker-specific fields ═══ -->
         <div id="worker-fields">
           <div class="input-group">
             <label for="signup-skill">Primary Skill / Work Type</label>
-            <select id="signup-skill">
+            <select id="signup-skill" required>
               <option value="" disabled selected>Select your primary skill</option>
               <option value="masonry">Masonry</option>
               <option value="plumbing">Plumbing</option>
@@ -255,7 +277,7 @@
         <div id="employer-fields" class="hidden">
           <div class="input-group">
             <label for="signup-employer-type">Employer Type</label>
-            <select id="signup-employer-type">
+            <select id="signup-employer-type" required>
               <option value="" disabled selected>Select employer type</option>
               <option value="individual">Individual / Household</option>
               <option value="contractor">Contractor</option>

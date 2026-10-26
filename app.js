@@ -1,5 +1,5 @@
 /* ═══════════════════════════════════════════════════════
-   KAAM — Interactive Modal & State Management
+   KAAM — Interactive Modal & State Management (Email Based)
    ═══════════════════════════════════════════════════════ */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -58,9 +58,14 @@ document.addEventListener('DOMContentLoaded', () => {
   const signupLocationLabel = document.getElementById('signup-location-label');
   const btnSignupSubmit = document.getElementById('btn-signup-submit');
 
-  // Password toggle
+  // Password toggles
   const togglePasswordSignin = document.getElementById('toggle-password-signin');
   const signinPassword = document.getElementById('signin-password');
+  const togglePasswordSignup = document.getElementById('toggle-password-signup');
+  const signupPassword = document.getElementById('signup-password');
+
+  // Email validation regex
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 
   // ═══ NAVBAR SCROLL ═══════════════════════════════════
@@ -87,12 +92,54 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
 
+  // ═══ EMAIL VALIDATION HELPER ════════════════════════
+  function validateEmail(inputId, errorId) {
+    const input = document.getElementById(inputId);
+    const error = document.getElementById(errorId);
+    const value = input.value.trim();
+
+    if (value && !emailRegex.test(value)) {
+      input.closest('.input-group').classList.add('error');
+      error.classList.add('visible');
+      return false;
+    } else {
+      input.closest('.input-group').classList.remove('error');
+      error.classList.remove('visible');
+      return true;
+    }
+  }
+
+  function clearValidationErrors() {
+    document.querySelectorAll('.input-group.error').forEach(g => g.classList.remove('error'));
+    document.querySelectorAll('.input-error.visible').forEach(e => e.classList.remove('visible'));
+  }
+
+  // Live email validation on blur
+  const signinEmail = document.getElementById('signin-email');
+  const signupEmail = document.getElementById('signup-email');
+
+  signinEmail.addEventListener('blur', () => validateEmail('signin-email', 'signin-email-error'));
+  signinEmail.addEventListener('input', () => {
+    if (signinEmail.closest('.input-group').classList.contains('error')) {
+      validateEmail('signin-email', 'signin-email-error');
+    }
+  });
+
+  signupEmail.addEventListener('blur', () => validateEmail('signup-email', 'signup-email-error'));
+  signupEmail.addEventListener('input', () => {
+    if (signupEmail.closest('.input-group').classList.contains('error')) {
+      validateEmail('signup-email', 'signup-email-error');
+    }
+  });
+
+
   // ═══ MODAL OPEN / CLOSE ═════════════════════════════
   function openModal(role, tab = 'signin') {
     currentRole = role;
     currentTab = tab;
     updateRoleUI();
     switchTab(tab);
+    clearValidationErrors();
     modalOverlay.classList.add('active');
     document.body.style.overflow = 'hidden';
   }
@@ -104,21 +151,25 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function resetForms() {
-    // Reset all form inputs
     formSignin.reset();
     formSignup.reset();
-    // Reset submit buttons
+    clearValidationErrors();
+
+    // Reset sign-in submit button
     const signinBtn = document.getElementById('btn-signin-submit');
     signinBtn.classList.remove('loading', 'success');
     signinBtn.innerHTML = `Log In <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>`;
+    signinBtn.style.background = '';
 
+    // Reset sign-up submit button
     const signupBtn = document.getElementById('btn-signup-submit');
     signupBtn.classList.remove('loading', 'success');
+    signupBtn.style.background = '';
     updateSignupButton();
   }
 
   // ── Button Click → Modal Triggers ──
-  // "Find Jobs" buttons → Worker Portal
+  // "Find Jobs" → Worker Portal
   btnFindJobs.addEventListener('click', (e) => {
     e.preventDefault();
     openModal('worker', 'signin');
@@ -129,7 +180,7 @@ document.addEventListener('DOMContentLoaded', () => {
     openModal('worker', 'signin');
   });
 
-  // "Find Workers" buttons → Employer Portal
+  // "Find Workers" → Employer Portal
   btnFindWorkers.addEventListener('click', (e) => {
     e.preventDefault();
     openModal('employer', 'signin');
@@ -140,7 +191,7 @@ document.addEventListener('DOMContentLoaded', () => {
     openModal('employer', 'signin');
   });
 
-  // "Sign In" → Worker Portal (default), Sign In tab
+  // "Sign In" → Worker Portal (default), Log In tab
   btnSignin.addEventListener('click', (e) => {
     e.preventDefault();
     openModal('worker', 'signin');
@@ -168,13 +219,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // ═══ ROLE SWITCHING ═════════════════════════════════
   function updateRoleUI() {
-    // Toggle slider position
     if (currentRole === 'worker') {
       roleBtnWorker.classList.add('active');
       roleBtnEmployer.classList.remove('active');
       roleToggleSlider.classList.remove('employer');
 
-      // Worker role indicators
+      // Role indicators
       signinRoleIndicator.classList.remove('employer');
       signinRoleLabel.textContent = 'Worker Portal';
       signupRoleIndicator.classList.remove('employer');
@@ -195,7 +245,7 @@ document.addEventListener('DOMContentLoaded', () => {
       roleBtnWorker.classList.remove('active');
       roleToggleSlider.classList.add('employer');
 
-      // Employer role indicators
+      // Role indicators
       signinRoleIndicator.classList.add('employer');
       signinRoleLabel.textContent = 'Employer Portal';
       signupRoleIndicator.classList.add('employer');
@@ -238,6 +288,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // ═══ TAB SWITCHING ═══════════════════════════════════
   function switchTab(tab) {
     currentTab = tab;
+    clearValidationErrors();
     if (tab === 'signin') {
       tabSignin.classList.add('active');
       tabSignup.classList.remove('active');
@@ -259,23 +310,37 @@ document.addEventListener('DOMContentLoaded', () => {
   linkToSignin.addEventListener('click', () => switchTab('signin'));
 
 
-  // ═══ PASSWORD TOGGLE ════════════════════════════════
-  togglePasswordSignin.addEventListener('click', () => {
-    const isPassword = signinPassword.type === 'password';
-    signinPassword.type = isPassword ? 'text' : 'password';
-    togglePasswordSignin.innerHTML = isPassword
-      ? `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg>`
-      : `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>`;
-  });
+  // ═══ PASSWORD TOGGLES ═══════════════════════════════
+  function setupPasswordToggle(toggleBtn, passwordInput) {
+    toggleBtn.addEventListener('click', () => {
+      const isPassword = passwordInput.type === 'password';
+      passwordInput.type = isPassword ? 'text' : 'password';
+      toggleBtn.innerHTML = isPassword
+        ? `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg>`
+        : `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>`;
+    });
+  }
+
+  setupPasswordToggle(togglePasswordSignin, signinPassword);
+  setupPasswordToggle(togglePasswordSignup, signupPassword);
 
 
   // ═══ FORM SUBMISSIONS ═══════════════════════════════
-  // Spinner SVG for loading states
   const spinnerSVG = `<svg class="spinner" width="20" height="20" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="3" fill="none" stroke-dasharray="31.4" stroke-linecap="round"><animateTransform attributeName="transform" type="rotate" from="0 12 12" to="360 12 12" dur="0.8s" repeatCount="indefinite"/></circle></svg>`;
 
   // Sign In form
   formSignin.addEventListener('submit', (e) => {
     e.preventDefault();
+
+    // Validate email
+    const emailValid = validateEmail('signin-email', 'signin-email-error');
+    if (!emailValid || !signinEmail.value.trim()) {
+      signinEmail.closest('.input-group').classList.add('error');
+      document.getElementById('signin-email-error').classList.add('visible');
+      signinEmail.focus();
+      return;
+    }
+
     const btn = document.getElementById('btn-signin-submit');
     btn.classList.add('loading');
     btn.innerHTML = `${spinnerSVG} Logging In...`;
@@ -297,14 +362,24 @@ document.addEventListener('DOMContentLoaded', () => {
   // Sign Up form
   formSignup.addEventListener('submit', (e) => {
     e.preventDefault();
+
+    // Validate email
+    const emailValid = validateEmail('signup-email', 'signup-email-error');
+    if (!emailValid || !signupEmail.value.trim()) {
+      signupEmail.closest('.input-group').classList.add('error');
+      document.getElementById('signup-email-error').classList.add('visible');
+      signupEmail.focus();
+      return;
+    }
+
     const btn = document.getElementById('btn-signup-submit');
     btn.classList.add('loading');
-    btn.innerHTML = `${spinnerSVG} Sending OTP...`;
+    btn.innerHTML = `${spinnerSVG} Creating account...`;
 
     setTimeout(() => {
       btn.classList.remove('loading');
       btn.classList.add('success');
-      btn.innerHTML = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4 12 14.01l-3-3"/></svg> OTP Sent! Check your phone`;
+      btn.innerHTML = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4 12 14.01l-3-3"/></svg> Account Created!`;
       btn.style.background = 'linear-gradient(135deg, #059669, #10B981)';
 
       setTimeout(() => {
@@ -316,27 +391,40 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
 
-  // ═══ OTP LOGIN & FORGOT PASSWORD (Placeholder) ═════
+  // ═══ FORGOT PASSWORD & MAGIC LINK ══════════════════
   const btnForgotPassword = document.getElementById('btn-forgot-password');
-  const btnOtpLogin = document.getElementById('btn-otp-login');
+  const btnMagicLink = document.getElementById('btn-magic-link');
 
   btnForgotPassword.addEventListener('click', () => {
-    // Could open a sub-flow; for now, provide feedback
-    btnForgotPassword.textContent = 'OTP sent to your number!';
-    btnForgotPassword.style.color = '#10B981';
+    const email = signinEmail.value.trim();
+    if (email && emailRegex.test(email)) {
+      btnForgotPassword.textContent = 'Reset link sent to your email!';
+      btnForgotPassword.style.color = '#10B981';
+    } else {
+      btnForgotPassword.textContent = 'Enter your email above first';
+      btnForgotPassword.style.color = '#EF4444';
+      signinEmail.focus();
+    }
     setTimeout(() => {
       btnForgotPassword.textContent = 'Forgot Password?';
       btnForgotPassword.style.color = '';
-    }, 2000);
+    }, 2500);
   });
 
-  btnOtpLogin.addEventListener('click', () => {
-    btnOtpLogin.textContent = 'OTP sent! Enter it as PIN above';
-    btnOtpLogin.style.color = '#10B981';
+  btnMagicLink.addEventListener('click', () => {
+    const email = signinEmail.value.trim();
+    if (email && emailRegex.test(email)) {
+      btnMagicLink.textContent = 'Magic link sent! Check your inbox';
+      btnMagicLink.style.color = '#10B981';
+    } else {
+      btnMagicLink.textContent = 'Enter your email above first';
+      btnMagicLink.style.color = '#EF4444';
+      signinEmail.focus();
+    }
     setTimeout(() => {
-      btnOtpLogin.textContent = 'Log in with OTP instead';
-      btnOtpLogin.style.color = '';
-    }, 2000);
+      btnMagicLink.textContent = 'Sign in with Magic Link';
+      btnMagicLink.style.color = '';
+    }, 2500);
   });
 
 });
