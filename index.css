@@ -1,5 +1,5 @@
 /* ═══════════════════════════════════════════════════════
-   KAAM — Premium Dark-Mode Landing Page
+   KAAM — Premium Dark-Mode Hero Landing Page
    ═══════════════════════════════════════════════════════ */
 
 /* ── Reset & Base ──────────────────────────────────── */
@@ -20,6 +20,8 @@
   --orange-hover: #FF7A00;
   --orange-glow: rgba(255, 107, 0, 0.25);
   --orange-soft: rgba(255, 107, 0, 0.08);
+  --blue-accent: #3B82F6;
+  --blue-soft: rgba(59, 130, 246, 0.08);
   --text-white: #FFFFFF;
   --text-gray: #9CA3AF;
   --text-muted: #6B7280;
@@ -29,6 +31,7 @@
   --radius-lg: 12px;
   --radius-xl: 16px;
   --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   --transition-bounce: 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
@@ -315,23 +318,10 @@ select {
 }
 
 @keyframes floatGlow {
-
-  0%,
-  100% {
-    transform: translate(0, 0) scale(1);
-  }
-
-  25% {
-    transform: translate(30px, -30px) scale(1.05);
-  }
-
-  50% {
-    transform: translate(-20px, 20px) scale(0.95);
-  }
-
-  75% {
-    transform: translate(20px, 10px) scale(1.02);
-  }
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  25% { transform: translate(30px, -30px) scale(1.05); }
+  50% { transform: translate(-20px, 20px) scale(0.95); }
+  75% { transform: translate(20px, 10px) scale(1.02); }
 }
 
 /* ── Hero Inner Grid ── */
@@ -525,37 +515,18 @@ select {
    ANIMATIONS
    ═══════════════════════════════════════════════════════ */
 @keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(28px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(28px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 @keyframes slideInRight {
-  from {
-    opacity: 0;
-    transform: translateX(40px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
+  from { opacity: 0; transform: translateX(40px); }
+  to { opacity: 1; transform: translateX(0); }
 }
 
-@keyframes shimmer {
-  0% {
-    background-position: -200% 0;
-  }
-
-  100% {
-    background-position: 200% 0;
-  }
+@keyframes pulseGlow {
+  0%, 100% { box-shadow: 0 0 0 0 var(--orange-glow); }
+  50% { box-shadow: 0 0 0 8px transparent; }
 }
 
 
@@ -574,7 +545,7 @@ select {
   -webkit-backdrop-filter: blur(12px);
   opacity: 0;
   visibility: hidden;
-  transition: var(--transition);
+  transition: opacity 0.35s ease, visibility 0.35s ease;
 }
 
 .modal-overlay.active {
@@ -584,21 +555,26 @@ select {
 
 .modal {
   width: 100%;
-  max-width: 440px;
+  max-width: 460px;
   background: var(--bg-card);
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-xl);
-  padding: 32px;
+  padding: 28px 32px 32px;
   position: relative;
-  transform: translateY(20px) scale(0.97);
-  transition: var(--transition);
-  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.5), 0 0 1px rgba(255, 255, 255, 0.1);
+  transform: translateY(24px) scale(0.96);
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.3s ease;
+  opacity: 0;
+  box-shadow:
+    0 24px 80px rgba(0, 0, 0, 0.5),
+    0 0 1px rgba(255, 255, 255, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04);
   max-height: 90vh;
   overflow-y: auto;
 }
 
 .modal-overlay.active .modal {
   transform: translateY(0) scale(1);
+  opacity: 1;
 }
 
 .modal-close {
@@ -614,52 +590,99 @@ select {
   color: var(--text-muted);
   transition: var(--transition);
   background: rgba(255, 255, 255, 0.05);
+  z-index: 10;
 }
 
 .modal-close:hover {
   color: var(--text-white);
   background: rgba(255, 255, 255, 0.1);
+  transform: rotate(90deg);
 }
 
-/* ── Modal Header ── */
+/* ── Role Toggle Switcher ── */
 .modal-header {
+  margin-bottom: 20px;
+}
+
+.role-toggle {
+  display: flex;
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: var(--radius);
+  padding: 4px;
+  position: relative;
+  border: 1px solid var(--border-light);
+}
+
+.role-toggle-btn {
+  flex: 1;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  margin-bottom: 24px;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 16px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  border-radius: 8px;
+  transition: var(--transition);
+  z-index: 2;
+  position: relative;
 }
 
-.modal-role-badge {
+.role-toggle-btn.active {
+  color: var(--text-white);
+}
+
+.role-toggle-btn:hover:not(.active) {
+  color: var(--text-gray);
+}
+
+.role-toggle-slider {
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  width: calc(50% - 4px);
+  height: calc(100% - 8px);
+  background: var(--orange);
+  border-radius: 8px;
+  transition: var(--transition);
+  box-shadow: 0 2px 12px var(--orange-glow);
+}
+
+.role-toggle[data-active="employer"] .role-toggle-slider,
+.role-toggle-slider.employer {
+  left: calc(50%);
+  background: var(--blue-accent);
+  box-shadow: 0 2px 12px rgba(59, 130, 246, 0.25);
+}
+
+/* ── Role Indicator in Forms ── */
+.modal-role-indicator {
   display: flex;
   align-items: center;
   gap: 8px;
-  padding: 6px 14px;
-  border-radius: 50px;
-  font-size: 0.85rem;
-  font-weight: 600;
+  padding: 8px 14px;
   background: var(--orange-soft);
+  border: 1px solid rgba(255, 107, 0, 0.12);
+  border-radius: 50px;
+  font-size: 0.8rem;
+  font-weight: 600;
   color: var(--orange);
-  border: 1px solid rgba(255, 107, 0, 0.15);
+  width: fit-content;
 }
 
-.modal-role-badge.employer {
-  background: rgba(59, 130, 246, 0.08);
+.modal-role-indicator.employer {
+  background: var(--blue-soft);
+  border-color: rgba(59, 130, 246, 0.12);
   color: #60A5FA;
-  border-color: rgba(59, 130, 246, 0.15);
 }
 
-.role-switch-btn {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 0.78rem;
-  font-weight: 500;
-  color: var(--text-muted);
-  transition: var(--transition);
-}
-
-.role-switch-btn:hover {
-  color: var(--orange);
+.role-indicator-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: currentColor;
+  animation: pulseGlow 2s ease-in-out infinite;
 }
 
 /* ── Modal Tabs ── */
@@ -668,20 +691,25 @@ select {
   background: rgba(255, 255, 255, 0.04);
   border-radius: var(--radius);
   padding: 4px;
-  margin-bottom: 24px;
+  margin-bottom: 20px;
   position: relative;
+  border: 1px solid var(--border-light);
 }
 
 .modal-tab {
   flex: 1;
   padding: 10px;
   text-align: center;
-  font-size: 0.85rem;
+  font-size: 0.84rem;
   font-weight: 600;
   color: var(--text-muted);
   border-radius: 8px;
   transition: var(--transition);
   z-index: 1;
+}
+
+.modal-tab:hover:not(.active) {
+  color: var(--text-gray);
 }
 
 .modal-tab.active {
@@ -704,7 +732,7 @@ select {
 .modal-form {
   display: flex;
   flex-direction: column;
-  gap: 18px;
+  gap: 16px;
 }
 
 .input-group {
@@ -714,20 +742,27 @@ select {
 }
 
 .input-group label {
-  font-size: 0.82rem;
+  font-size: 0.8rem;
   font-weight: 600;
   color: var(--text-gray);
   letter-spacing: 0.3px;
 }
 
+.optional-tag {
+  font-size: 0.7rem;
+  font-weight: 400;
+  color: var(--text-muted);
+  font-style: italic;
+}
+
 .input-group input,
 .input-group select {
   width: 100%;
-  padding: 12px 16px;
+  padding: 11px 14px;
   background: rgba(255, 255, 255, 0.04);
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius);
-  font-size: 0.92rem;
+  font-size: 0.9rem;
   color: var(--text-white);
   outline: none;
   transition: var(--transition);
@@ -782,6 +817,7 @@ select {
   color: var(--text-gray);
   background: rgba(255, 255, 255, 0.03);
   border-right: 1px solid var(--border-subtle);
+  white-space: nowrap;
 }
 
 .phone-input input {
@@ -824,14 +860,22 @@ select {
   color: var(--text-gray);
 }
 
+/* ── Form Links Row ── */
+.form-links-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: -4px 0;
+}
+
 /* ── Submit Button ── */
 .btn-submit {
   width: 100%;
-  padding: 14px 24px;
+  padding: 13px 24px;
   background: var(--orange);
   color: white;
   font-weight: 700;
-  font-size: 0.95rem;
+  font-size: 0.92rem;
   border-radius: var(--radius);
   display: flex;
   align-items: center;
@@ -848,16 +892,26 @@ select {
   box-shadow: 0 6px 28px rgba(255, 107, 0, 0.35);
 }
 
+.btn-submit.success {
+  background: linear-gradient(135deg, #059669, #10B981) !important;
+  box-shadow: 0 4px 20px rgba(5, 150, 105, 0.3);
+}
+
+.btn-submit.loading {
+  pointer-events: none;
+  opacity: 0.85;
+}
+
 .form-footer-text {
   text-align: center;
-  font-size: 0.82rem;
+  font-size: 0.8rem;
   color: var(--text-muted);
 }
 
 .link-btn {
   color: var(--orange);
   font-weight: 600;
-  font-size: 0.82rem;
+  font-size: inherit;
   transition: var(--transition);
 }
 
@@ -868,17 +922,41 @@ select {
 
 
 /* ═══════════════════════════════════════════════════════
-   SCROLL REVEAL
+   SCROLLBAR
    ═══════════════════════════════════════════════════════ */
-.reveal {
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
+::-webkit-scrollbar {
+  width: 6px;
 }
 
-.reveal.visible {
-  opacity: 1;
-  transform: translateY(0);
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.modal::-webkit-scrollbar {
+  width: 4px;
+}
+
+.modal::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 4px;
+}
+
+
+/* ═══════════════════════════════════════════════════════
+   SELECTION
+   ═══════════════════════════════════════════════════════ */
+::selection {
+  background: var(--orange);
+  color: white;
 }
 
 
@@ -937,6 +1015,7 @@ select {
     right: 0;
     background: rgba(15, 17, 21, 0.98);
     backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
     flex-direction: column;
     padding: 16px;
     border-bottom: 1px solid var(--border-subtle);
@@ -977,7 +1056,19 @@ select {
 
   .modal {
     margin: 16px;
-    padding: 24px;
+    padding: 20px 24px 24px;
+    max-height: 85vh;
+  }
+
+  .role-toggle-btn {
+    font-size: 0.8rem;
+    padding: 8px 12px;
+  }
+
+  .form-links-row {
+    flex-direction: column;
+    gap: 4px;
+    align-items: flex-start;
   }
 }
 
@@ -1003,34 +1094,9 @@ select {
   .hero-subtitle {
     font-size: 0.95rem;
   }
-}
 
-
-/* ═══════════════════════════════════════════════════════
-   SCROLLBAR
-   ═══════════════════════════════════════════════════════ */
-::-webkit-scrollbar {
-  width: 8px;
-}
-
-::-webkit-scrollbar-track {
-  background: var(--bg-dark);
-}
-
-::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 4px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.2);
-}
-
-
-/* ═══════════════════════════════════════════════════════
-   SELECTION
-   ═══════════════════════════════════════════════════════ */
-::selection {
-  background: var(--orange);
-  color: white;
+  .modal {
+    margin: 8px;
+    padding: 18px 20px 22px;
+  }
 }

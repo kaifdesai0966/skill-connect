@@ -126,33 +126,43 @@
         </svg>
       </button>
 
+      <!-- Role Toggle Switcher -->
       <div class="modal-header">
-        <div class="modal-role-badge" id="modal-role-badge">
-          <span class="role-icon" id="role-icon">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <div class="role-toggle" id="role-toggle">
+          <button class="role-toggle-btn active" data-role="worker" id="role-btn-worker">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <path d="M20 7h-9M14 17H5" />
               <circle cx="17" cy="17" r="3" />
               <circle cx="7" cy="7" r="3" />
             </svg>
-          </span>
-          <span id="modal-role-text">Worker Portal</span>
+            Worker
+          </button>
+          <button class="role-toggle-btn" data-role="employer" id="role-btn-employer">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+              <circle cx="9" cy="7" r="4" />
+              <path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" />
+            </svg>
+            Employer
+          </button>
+          <div class="role-toggle-slider" id="role-toggle-slider"></div>
         </div>
-        <button class="role-switch-btn" id="role-switch-btn">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M7 16V4m0 0L3 8m4-4l4 4M17 8v12m0 0l4-4m-4 4l-4-4" />
-          </svg>
-          Switch to <span id="role-switch-label">Employer</span>
-        </button>
       </div>
 
+      <!-- Auth Tabs -->
       <div class="modal-tabs" id="modal-tabs">
-        <button class="modal-tab active" data-tab="signin" id="tab-signin">Sign In</button>
-        <button class="modal-tab" data-tab="signup" id="tab-signup">Register / Sign Up</button>
+        <button class="modal-tab active" data-tab="signin" id="tab-signin">Log In</button>
+        <button class="modal-tab" data-tab="signup" id="tab-signup">Sign Up / Register</button>
         <div class="tab-indicator"></div>
       </div>
 
-      <!-- SIGN IN FORM -->
+      <!-- ═══ LOG IN FORM ═══ -->
       <form class="modal-form" id="form-signin">
+        <div class="modal-role-indicator" id="signin-role-indicator">
+          <span class="role-indicator-dot"></span>
+          <span id="signin-role-label">Worker Portal</span>
+        </div>
+
         <div class="input-group">
           <label for="signin-phone">Mobile Number</label>
           <div class="phone-input">
@@ -161,6 +171,7 @@
               autocomplete="tel" />
           </div>
         </div>
+
         <div class="input-group">
           <label for="signin-password">Password / PIN</label>
           <div class="password-input">
@@ -174,72 +185,92 @@
             </button>
           </div>
         </div>
+
+        <div class="form-links-row">
+          <button type="button" class="link-btn" id="btn-forgot-password">Forgot Password?</button>
+          <button type="button" class="link-btn" id="btn-otp-login">Log in with OTP instead</button>
+        </div>
+
         <button type="submit" class="btn btn-submit" id="btn-signin-submit">
-          Sign In
+          Log In
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <path d="M5 12h14M12 5l7 7-7 7" />
           </svg>
         </button>
+
         <p class="form-footer-text">
           Don't have an account? <button type="button" class="link-btn" id="link-to-signup">Create one now</button>
         </p>
       </form>
 
-      <!-- SIGN UP / REGISTER FORM -->
+      <!-- ═══ SIGN UP / REGISTER FORM ═══ -->
       <form class="modal-form hidden" id="form-signup">
+        <div class="modal-role-indicator" id="signup-role-indicator">
+          <span class="role-indicator-dot"></span>
+          <span id="signup-role-label">Registering as Worker</span>
+        </div>
+
+        <!-- Shared Fields -->
         <div class="input-group">
-          <label for="signup-name">Full Name</label>
+          <label for="signup-name" id="signup-name-label">Full Name</label>
           <input type="text" id="signup-name" placeholder="Enter your full name" autocomplete="name" />
         </div>
+
         <div class="input-group">
-          <label for="signup-phone">Phone Number</label>
+          <label for="signup-phone">Mobile Number</label>
           <div class="phone-input">
             <span class="country-code">+91</span>
             <input type="tel" id="signup-phone" placeholder="Enter your phone number" maxlength="10"
               autocomplete="tel" />
           </div>
         </div>
+
         <div class="input-group">
-          <label for="signup-location">Location / Pincode</label>
+          <label for="signup-location" id="signup-location-label">City / Pincode</label>
           <input type="text" id="signup-location" placeholder="Enter area name or 6-digit pincode" />
         </div>
 
-        <!-- Worker-specific field -->
-        <div class="input-group" id="field-worker-skill">
-          <label for="signup-skill">Skill Category</label>
-          <select id="signup-skill">
-            <option value="" disabled selected>Select your primary skill</option>
-            <option value="masonry">Masonry</option>
-            <option value="plumbing">Plumbing</option>
-            <option value="carpentry">Carpentry</option>
-            <option value="painting">Painting</option>
-            <option value="electrical">Electrical</option>
-            <option value="construction">Construction</option>
-          </select>
+        <!-- ═══ Worker-specific fields ═══ -->
+        <div id="worker-fields">
+          <div class="input-group">
+            <label for="signup-skill">Primary Skill / Work Type</label>
+            <select id="signup-skill">
+              <option value="" disabled selected>Select your primary skill</option>
+              <option value="masonry">Masonry</option>
+              <option value="plumbing">Plumbing</option>
+              <option value="carpentry">Carpentry</option>
+              <option value="painting">Painting</option>
+              <option value="electrical">Electrical Work</option>
+              <option value="construction">Construction</option>
+              <option value="domestic">Domestic Help</option>
+            </select>
+          </div>
+          <div class="input-group">
+            <label for="signup-wage">Daily Wage Expectation (₹) <span class="optional-tag">Optional</span></label>
+            <input type="number" id="signup-wage" placeholder="e.g. 600" min="100" max="5000" />
+          </div>
         </div>
 
-        <!-- Employer-specific field -->
-        <div class="input-group hidden" id="field-employer-type">
-          <label for="signup-employer-type">Employer Type</label>
-          <select id="signup-employer-type">
-            <option value="" disabled selected>Select employer type</option>
-            <option value="contractor">Contractor</option>
-            <option value="household">Household Employer</option>
-            <option value="business">Small Business Owner</option>
-            <option value="factory">Factory / Warehouse</option>
-            <option value="other">Other</option>
-          </select>
+        <!-- ═══ Employer-specific fields ═══ -->
+        <div id="employer-fields" class="hidden">
+          <div class="input-group">
+            <label for="signup-employer-type">Employer Type</label>
+            <select id="signup-employer-type">
+              <option value="" disabled selected>Select employer type</option>
+              <option value="individual">Individual / Household</option>
+              <option value="contractor">Contractor</option>
+              <option value="business">Business Owner</option>
+            </select>
+          </div>
         </div>
 
         <button type="submit" class="btn btn-submit" id="btn-signup-submit">
+          Register as Worker
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07" />
-            <path d="M3.59 1.59l2 2M1 5l3.59-3.41" />
-            <path d="M14 2a7 7 0 0 1 7 7" />
-            <path d="M14 6a3 3 0 0 1 3 3" />
+            <path d="M5 12h14M12 5l7 7-7 7" />
           </svg>
-          Send OTP &amp; Register
         </button>
+
         <p class="form-footer-text">
           Already have an account? <button type="button" class="link-btn" id="link-to-signin">Sign in here</button>
         </p>
