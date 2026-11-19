@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en" id="html-root">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KAAM — Dashboard | Work Connected</title>
+  <meta name="description" content="KAAM Dashboard — Browse daily-wage jobs and skilled workers near you." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Noto+Sans+Devanagari:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="dashboard.css" />
+</head>
+
+<body>
+
+  <!-- ═══════════════════════════════════════════════
+       TOP NAVIGATION BAR
+       ═══════════════════════════════════════════════ -->
+  <nav id="dash-navbar" class="dash-navbar">
+    <div class="dash-nav-inner">
+
+      <!-- Left: Logo -->
+      <a href="index.html" class="dash-brand" id="dash-brand">
+        <div class="dash-brand-icon">
+          <!-- Hard-hat icon -->
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+            <path d="M2 18h20v2H2z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M4 18v-3a8 8 0 0 1 16 0v3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M12 3v4M7 7l2 2M17 7l-2 2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <circle cx="12" cy="11" r="2" fill="currentColor"/>
+          </svg>
+        </div>
+        <div class="dash-brand-text">
+          <span class="dash-brand-name">KAAM</span>
+          <span class="dash-brand-tagline" id="brand-tagline">WORK CONNECTED.</span>
+        </div>
+      </a>
+
+      <!-- Center: Location Pill -->
+      <button class="location-pill" id="location-pill" title="Edit location">
+        <span class="location-emoji">📍</span>
+        <span id="location-text">Bengaluru, 560001</span>
+        <svg class="location-edit-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
+          <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+        </svg>
+      </button>
+
+      <!-- Right: Controls -->
+      <div class="dash-nav-right">
+
+        <!-- Language Toggle Pill -->
+        <div class="lang-toggle" id="lang-toggle">
+          <button class="lang-btn active" id="lang-en" data-lang="EN">English</button>
+          <button class="lang-btn" id="lang-hi" data-lang="HI">हिंदी</button>
+          <div class="lang-slider" id="lang-slider"></div>
+        </div>
+
+        <!-- Role Badge -->
+        <div class="role-badge" id="role-badge">
+          <span class="role-dot"></span>
+          <span id="role-badge-text">Worker</span>
+        </div>
+
+        <!-- Profile Avatar + Logout -->
+        <div class="profile-area">
+          <div class="avatar" id="user-avatar" title="Profile">
+            <span>RK</span>
+          </div>
+          <button class="btn-logout" id="btn-logout">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+              <polyline points="16 17 21 12 16 7"/>
+              <line x1="21" y1="12" x2="9" y2="12"/>
+            </svg>
+            <span id="logout-label">Logout</span>
+          </button>
+        </div>
+
+        <!-- Mobile hamburger -->
+        <button class="dash-hamburger" id="dash-hamburger" aria-label="Menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Location Edit Modal -->
+  <div class="location-modal-overlay" id="location-modal-overlay">
+    <div class="location-modal">
+      <button class="loc-modal-close" id="loc-modal-close">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <path d="M18 6 6 18M6 6l12 12"/>
+        </svg>
+      </button>
+      <h3 id="loc-modal-title">Edit Location</h3>
+      <input type="text" id="location-input" placeholder="City name or pincode…" autocomplete="off"/>
+      <button class="btn-loc-save" id="btn-loc-save">
+        <span id="loc-save-label">Save Location</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════
+       MAIN DASHBOARD
+       ═══════════════════════════════════════════════ -->
+  <main class="dash-main" id="dash-main">
+
+    <!-- Ambient glows -->
+    <div class="dash-ambient">
+      <div class="d-glow d-glow-1"></div>
+      <div class="d-glow d-glow-2"></div>
+    </div>
+
+    <!-- ── CATEGORIES VIEW ── -->
+    <section class="categories-section" id="categories-section">
+      <div class="section-inner">
+
+        <!-- Section Header -->
+        <div class="section-header">
+          <h2 class="section-title" id="section-title">Select a Work Category</h2>
+          <p class="section-subtitle" id="section-subtitle">Browse verified daily-wage opportunities and skilled professionals near you.</p>
+        </div>
+
+        <!-- Search Bar -->
+        <div class="search-bar-wrap">
+          <div class="search-bar">
+            <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <circle cx="11" cy="11" r="8"/>
+              <path d="m21 21-4.35-4.35"/>
+            </svg>
+            <input type="text" id="category-search" class="search-input" placeholder="Search categories…" autocomplete="off" />
+            <button class="search-clear hidden" id="search-clear" aria-label="Clear search">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <path d="M18 6 6 18M6 6l12 12"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- Category Grid -->
+        <div class="category-grid" id="category-grid">
+          <!-- Cards injected by JS -->
+        </div>
+
+        <!-- Empty state for search -->
+        <div class="empty-state hidden" id="empty-state">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.4">
+            <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+          </svg>
+          <p id="empty-state-text">No categories match your search.</p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ── LISTINGS DRAWER ── -->
+    <section class="listings-section hidden" id="listings-section">
+      <div class="section-inner">
+
+        <!-- Back Button + Heading -->
+        <div class="listings-header">
+          <button class="btn-back" id="btn-back">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <path d="M19 12H5M12 19l-7-7 7-7"/>
+            </svg>
+            <span id="back-label">Back to All Categories</span>
+          </button>
+
+          <div class="listings-title-row">
+            <div class="listings-category-icon" id="listings-cat-icon"></div>
+            <div>
+              <h2 class="listings-title" id="listings-title">Plumber Jobs</h2>
+              <p class="listings-subtitle" id="listings-subtitle">14 jobs available near you</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Listings Grid -->
+        <div class="listings-grid" id="listings-grid">
+          <!-- Cards injected by JS -->
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <script src="dashboard.js"></script>
+</body>
+
+</html>
+
