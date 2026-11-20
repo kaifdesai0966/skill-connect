@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
     isLoggedIn: false,       // false → landing, true → dashboard
     userRole: 'worker',    // 'worker' | 'employer'
     language: 'EN',        // 'EN' | 'HI'
-    location: 'Bengaluru, 560001',
+    location: 'Belegavi, 590016',
     activeCategory: null,    // category id when listings drawer is open
     searchQuery: '',
     userName: '',
@@ -251,7 +251,7 @@ document.addEventListener('DOMContentLoaded', () => {
               </svg>
             </div>
             <div class="brand-text">
-              <span class="brand-name">KAAM </span>
+              <span class="brand-name">Skill Connect </span>
               <span class="brand-tagline" id="db-tagline">WORK CONNECTED.</span>
             </div>
           </a>

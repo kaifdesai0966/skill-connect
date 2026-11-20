@@ -1,5 +1,5 @@
 /* ═══════════════════════════════════════════════════════
-   KAAM — Dashboard Logic
+  Skill Connect— Dashboard Logic
    Bilingual (EN / HI), Category Cards, Listings Drawer
    ═══════════════════════════════════════════════════════ */
 
@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // ═══════════════════════════════════════════════════
   const state = {
     language: 'EN',           // 'EN' | 'HI'
-    role:     'worker',       // 'worker' | 'employer'
+    role: 'worker',       // 'worker' | 'employer'
     location: 'Bengaluru, 560001',
     activeCategory: null,     // category id when drawer is open
     searchQuery: '',
@@ -26,52 +26,52 @@ document.addEventListener('DOMContentLoaded', () => {
   // ═══════════════════════════════════════════════════
   const T = {
     EN: {
-      brandTagline:        'WORK CONNECTED.',
-      locationLabel:       state.location,
-      sectionTitle:        'Select a Work Category',
-      sectionSubtitle:     'Browse verified daily-wage opportunities and skilled professionals near you.',
-      searchPlaceholder:   'Search categories…',
-      roleBadgeWorker:     'Worker',
-      roleBadgeEmployer:   'Employer',
-      logout:              'Logout',
-      backBtn:             '← Back to All Categories',
-      emptyState:          'No categories match your search.',
-      locModalTitle:       'Edit Location',
-      locSaveLabel:        'Save Location',
-      locPlaceholder:      'City name or pincode…',
-      jobsAvailable:       (n) => `${n} Jobs Available`,
-      jobsNearYou:         (name, n) => `${n} ${n === 1 ? 'job' : 'jobs'} available near you`,
-      workersAvailable:    (n) => `${n} Workers Available`,
-      workersNearYou:      (name, n) => `${n} ${n === 1 ? 'worker' : 'workers'} available near you`,
-      applyBtn:            'Apply / Call Now',
-      hireBtn:             'Hire / Contact',
-      distLabel:           (km) => `${km} km away`,
-      dailyRate:           (amt) => `₹${amt}/day`,
-      expLabel:            (y) => `${y} yrs exp.`,
+      brandTagline: 'WORK CONNECTED.',
+      locationLabel: state.location,
+      sectionTitle: 'Select a Work Category',
+      sectionSubtitle: 'Browse verified daily-wage opportunities and skilled professionals near you.',
+      searchPlaceholder: 'Search categories…',
+      roleBadgeWorker: 'Worker',
+      roleBadgeEmployer: 'Employer',
+      logout: 'Logout',
+      backBtn: '← Back to All Categories',
+      emptyState: 'No categories match your search.',
+      locModalTitle: 'Edit Location',
+      locSaveLabel: 'Save Location',
+      locPlaceholder: 'City name or pincode…',
+      jobsAvailable: (n) => `${n} Jobs Available`,
+      jobsNearYou: (name, n) => `${n} ${n === 1 ? 'job' : 'jobs'} available near you`,
+      workersAvailable: (n) => `${n} Workers Available`,
+      workersNearYou: (name, n) => `${n} ${n === 1 ? 'worker' : 'workers'} available near you`,
+      applyBtn: 'Apply / Call Now',
+      hireBtn: 'Hire / Contact',
+      distLabel: (km) => `${km} km away`,
+      dailyRate: (amt) => `₹${amt}/day`,
+      expLabel: (y) => `${y} yrs exp.`,
     },
     HI: {
-      brandTagline:        'काम कनेक्टेड.',
-      locationLabel:       state.location,
-      sectionTitle:        'काम की श्रेणी चुनें',
-      sectionSubtitle:     'अपने पास उपलब्ध दैनिक वेतन के काम और कुशल कारीगर खोजें।',
-      searchPlaceholder:   'श्रेणी खोजें…',
-      roleBadgeWorker:     'मजदूर',
-      roleBadgeEmployer:   'नियोक्ता',
-      logout:              'लॉग आउट',
-      backBtn:             '← सभी श्रेणियों पर वापस जाएं',
-      emptyState:          'आपकी खोज से कोई श्रेणी मेल नहीं खाती।',
-      locModalTitle:       'स्थान बदलें',
-      locSaveLabel:        'स्थान सहेजें',
-      locPlaceholder:      'शहर का नाम या पिनकोड…',
-      jobsAvailable:       (n) => `${n} काम उपलब्ध`,
-      jobsNearYou:         (name, n) => `आपके पास ${n} काम उपलब्ध`,
-      workersAvailable:    (n) => `${n} कारीगर उपलब्ध`,
-      workersNearYou:      (name, n) => `आपके पास ${n} कारीगर उपलब्ध`,
-      applyBtn:            'अप्लाई करें / अभी कॉल करें',
-      hireBtn:             'हायर करें / संपर्क करें',
-      distLabel:           (km) => `${km} किमी दूर`,
-      dailyRate:           (amt) => `₹${amt}/दिन`,
-      expLabel:            (y) => `${y} साल अनुभव`,
+      brandTagline: 'काम कनेक्टेड.',
+      locationLabel: state.location,
+      sectionTitle: 'काम की श्रेणी चुनें',
+      sectionSubtitle: 'अपने पास उपलब्ध दैनिक वेतन के काम और कुशल कारीगर खोजें।',
+      searchPlaceholder: 'श्रेणी खोजें…',
+      roleBadgeWorker: 'मजदूर',
+      roleBadgeEmployer: 'नियोक्ता',
+      logout: 'लॉग आउट',
+      backBtn: '← सभी श्रेणियों पर वापस जाएं',
+      emptyState: 'आपकी खोज से कोई श्रेणी मेल नहीं खाती।',
+      locModalTitle: 'स्थान बदलें',
+      locSaveLabel: 'स्थान सहेजें',
+      locPlaceholder: 'शहर का नाम या पिनकोड…',
+      jobsAvailable: (n) => `${n} काम उपलब्ध`,
+      jobsNearYou: (name, n) => `आपके पास ${n} काम उपलब्ध`,
+      workersAvailable: (n) => `${n} कारीगर उपलब्ध`,
+      workersNearYou: (name, n) => `आपके पास ${n} कारीगर उपलब्ध`,
+      applyBtn: 'अप्लाई करें / अभी कॉल करें',
+      hireBtn: 'हायर करें / संपर्क करें',
+      distLabel: (km) => `${km} किमी दूर`,
+      dailyRate: (amt) => `₹${amt}/दिन`,
+      expLabel: (y) => `${y} साल अनुभव`,
     },
   };
 
@@ -83,57 +83,57 @@ document.addEventListener('DOMContentLoaded', () => {
     {
       id: 'plumber',
       icon: '🔧',
-      en:   { title: 'Plumber',               desc: 'Pipe & tap repairs' },
-      hi:   { title: 'प्लंबर',                desc: 'पाइप और नल की मरम्मत' },
+      en: { title: 'Plumber', desc: 'Pipe & tap repairs' },
+      hi: { title: 'प्लंबर', desc: 'पाइप और नल की मरम्मत' },
       count: 14,
     },
     {
       id: 'electrician',
       icon: '⚡',
-      en:   { title: 'Electrician',            desc: 'Wiring, fans & switchboards' },
-      hi:   { title: 'इलेक्ट्रीशियन',         desc: 'वायरिंग, पंखे और स्विचबोर्ड' },
+      en: { title: 'Electrician', desc: 'Wiring, fans & switchboards' },
+      hi: { title: 'इलेक्ट्रीशियन', desc: 'वायरिंग, पंखे और स्विचबोर्ड' },
       count: 22,
     },
     {
       id: 'carpenter',
       icon: '🪚',
-      en:   { title: 'Carpenter',              desc: 'Furniture & woodwork' },
-      hi:   { title: 'बढ़ई (कारपेंटर)',        desc: 'फर्नीचर और लकड़ी का काम' },
+      en: { title: 'Carpenter', desc: 'Furniture & woodwork' },
+      hi: { title: 'बढ़ई (कारपेंटर)', desc: 'फर्नीचर और लकड़ी का काम' },
       count: 9,
     },
     {
       id: 'mason',
       icon: '🧱',
-      en:   { title: 'Mason / Construction',   desc: 'Brickwork, plastering & tiling' },
-      hi:   { title: 'राजमिस्त्री',            desc: 'ईंट, प्लास्टर और टाइल का काम' },
+      en: { title: 'Mason / Construction', desc: 'Brickwork, plastering & tiling' },
+      hi: { title: 'राजमिस्त्री', desc: 'ईंट, प्लास्टर और टाइल का काम' },
       count: 31,
     },
     {
       id: 'painter',
       icon: '🖌️',
-      en:   { title: 'Painter',                desc: 'Wall painting & whitewashing' },
-      hi:   { title: 'पेंटर',                 desc: 'दीवार पेंटिंग और सफेदी' },
+      en: { title: 'Painter', desc: 'Wall painting & whitewashing' },
+      hi: { title: 'पेंटर', desc: 'दीवार पेंटिंग और सफेदी' },
       count: 11,
     },
     {
       id: 'domestic',
       icon: '🏠',
-      en:   { title: 'Domestic Help / Cleaner', desc: 'Cleaning & household tasks' },
-      hi:   { title: 'घरेलू सहायक',            desc: 'सफाई और घरेलू काम' },
+      en: { title: 'Domestic Help / Cleaner', desc: 'Cleaning & household tasks' },
+      hi: { title: 'घरेलू सहायक', desc: 'सफाई और घरेलू काम' },
       count: 27,
     },
     {
       id: 'loader',
       icon: '📦',
-      en:   { title: 'Loader / Helper',        desc: 'Shifting, loading & general labor' },
-      hi:   { title: 'मजदूर / हेल्पर',         desc: 'सामान उठाना, लोडिंग और सामान्य मजदूरी' },
+      en: { title: 'Loader / Helper', desc: 'Shifting, loading & general labor' },
+      hi: { title: 'मजदूर / हेल्पर', desc: 'सामान उठाना, लोडिंग और सामान्य मजदूरी' },
       count: 18,
     },
     {
       id: 'driver',
       icon: '🚗',
-      en:   { title: 'Driver / Delivery',      desc: 'Local transport & commercial driving' },
-      hi:   { title: 'ड्राइवर',               desc: 'स्थानीय परिवहन और कमर्शियल ड्राइविंग' },
+      en: { title: 'Driver / Delivery', desc: 'Local transport & commercial driving' },
+      hi: { title: 'ड्राइवर', desc: 'स्थानीय परिवहन और कमर्शियल ड्राइविंग' },
       count: 16,
     },
   ];
@@ -143,88 +143,88 @@ document.addEventListener('DOMContentLoaded', () => {
   //  SAMPLE LISTINGS DATA
   // ═══════════════════════════════════════════════════
   const JOBS = {
-    plumber:     [
-      { id:'j1', enTitle:'Bathroom Leakage Fix', hiTitle:'बाथरूम लीकेज ठीक करना', employer:'Rahul Sharma', dist:1.2, wage:650 },
-      { id:'j2', enTitle:'New Pipe Installation', hiTitle:'नई पाइप लगाना', employer:'Priya Builders', dist:2.5, wage:800 },
-      { id:'j3', enTitle:'Tap Replacement Work',  hiTitle:'नल बदलने का काम', employer:'Anil Kumar', dist:0.8, wage:500 },
+    plumber: [
+      { id: 'j1', enTitle: 'Bathroom Leakage Fix', hiTitle: 'बाथरूम लीकेज ठीक करना', employer: 'Rahul Sharma', dist: 1.2, wage: 650 },
+      { id: 'j2', enTitle: 'New Pipe Installation', hiTitle: 'नई पाइप लगाना', employer: 'Priya Builders', dist: 2.5, wage: 800 },
+      { id: 'j3', enTitle: 'Tap Replacement Work', hiTitle: 'नल बदलने का काम', employer: 'Anil Kumar', dist: 0.8, wage: 500 },
     ],
     electrician: [
-      { id:'j1', enTitle:'Home Rewiring Project',       hiTitle:'घर की रिवायरिंग', employer:'Sharma Construction', dist:3.1, wage:900 },
-      { id:'j2', enTitle:'Ceiling Fan Installation',    hiTitle:'छत पंखा लगाना', employer:'Meena Devi', dist:1.4, wage:600 },
-      { id:'j3', enTitle:'Switchboard Repair',          hiTitle:'स्विचबोर्ड मरम्मत', employer:'Star Enterprises', dist:0.6, wage:550 },
+      { id: 'j1', enTitle: 'Home Rewiring Project', hiTitle: 'घर की रिवायरिंग', employer: 'Sharma Construction', dist: 3.1, wage: 900 },
+      { id: 'j2', enTitle: 'Ceiling Fan Installation', hiTitle: 'छत पंखा लगाना', employer: 'Meena Devi', dist: 1.4, wage: 600 },
+      { id: 'j3', enTitle: 'Switchboard Repair', hiTitle: 'स्विचबोर्ड मरम्मत', employer: 'Star Enterprises', dist: 0.6, wage: 550 },
     ],
-    carpenter:   [
-      { id:'j1', enTitle:'Kitchen Cabinet Fitting', hiTitle:'किचन कैबिनेट लगाना', employer:'Kapoor Interiors', dist:2.0, wage:1100 },
-      { id:'j2', enTitle:'Door Frame Repair',       hiTitle:'दरवाजे का फ्रेम ठीक करना', employer:'Ramesh Gupta', dist:1.7, wage:700 },
-      { id:'j3', enTitle:'Wardrobe Assembly',       hiTitle:'वार्डरोब जोड़ना', employer:'Deepa Home Decor', dist:4.2, wage:850 },
+    carpenter: [
+      { id: 'j1', enTitle: 'Kitchen Cabinet Fitting', hiTitle: 'किचन कैबिनेट लगाना', employer: 'Kapoor Interiors', dist: 2.0, wage: 1100 },
+      { id: 'j2', enTitle: 'Door Frame Repair', hiTitle: 'दरवाजे का फ्रेम ठीक करना', employer: 'Ramesh Gupta', dist: 1.7, wage: 700 },
+      { id: 'j3', enTitle: 'Wardrobe Assembly', hiTitle: 'वार्डरोब जोड़ना', employer: 'Deepa Home Decor', dist: 4.2, wage: 850 },
     ],
-    mason:       [
-      { id:'j1', enTitle:'Room Extension Work',       hiTitle:'कमरे का विस्तार कार्य', employer:'BuildRight Co.', dist:5.0, wage:1200 },
-      { id:'j2', enTitle:'Floor Tiling – 3BHK',      hiTitle:'3BHK में फर्श टाइलिंग', employer:'Suresh Developers', dist:3.3, wage:1000 },
-      { id:'j3', enTitle:'Plaster & Finish Work',    hiTitle:'प्लास्टर और फिनिश काम', employer:'Raja Constructions', dist:2.1, wage:900 },
+    mason: [
+      { id: 'j1', enTitle: 'Room Extension Work', hiTitle: 'कमरे का विस्तार कार्य', employer: 'BuildRight Co.', dist: 5.0, wage: 1200 },
+      { id: 'j2', enTitle: 'Floor Tiling – 3BHK', hiTitle: '3BHK में फर्श टाइलिंग', employer: 'Suresh Developers', dist: 3.3, wage: 1000 },
+      { id: 'j3', enTitle: 'Plaster & Finish Work', hiTitle: 'प्लास्टर और फिनिश काम', employer: 'Raja Constructions', dist: 2.1, wage: 900 },
     ],
-    painter:     [
-      { id:'j1', enTitle:'2BHK Painting (Interior)', hiTitle:'2BHK अंदरूनी पेंटिंग', employer:'Vikram Singh', dist:1.9, wage:800 },
-      { id:'j2', enTitle:'Exterior Whitewashing',    hiTitle:'बाहरी सफेदी', employer:'City Homes Pvt Ltd', dist:3.8, wage:1000 },
-      { id:'j3', enTitle:'POP Ceiling Painting',     hiTitle:'POP छत की पेंटिंग', employer:'Anand Nair', dist:2.6, wage:750 },
+    painter: [
+      { id: 'j1', enTitle: '2BHK Painting (Interior)', hiTitle: '2BHK अंदरूनी पेंटिंग', employer: 'Vikram Singh', dist: 1.9, wage: 800 },
+      { id: 'j2', enTitle: 'Exterior Whitewashing', hiTitle: 'बाहरी सफेदी', employer: 'City Homes Pvt Ltd', dist: 3.8, wage: 1000 },
+      { id: 'j3', enTitle: 'POP Ceiling Painting', hiTitle: 'POP छत की पेंटिंग', employer: 'Anand Nair', dist: 2.6, wage: 750 },
     ],
-    domestic:    [
-      { id:'j1', enTitle:'Daily House Cleaning',    hiTitle:'रोज घर की सफाई', employer:'Mrs. Lakshmi', dist:0.4, wage:450 },
-      { id:'j2', enTitle:'Utensil Washing + Swab', hiTitle:'बर्तन और पोंछा', employer:'Patel Family', dist:0.9, wage:500 },
-      { id:'j3', enTitle:'Full-Day Home Help',      hiTitle:'पूरे दिन का घरेलू काम', employer:'Sharma Household', dist:1.1, wage:600 },
+    domestic: [
+      { id: 'j1', enTitle: 'Daily House Cleaning', hiTitle: 'रोज घर की सफाई', employer: 'Mrs. Lakshmi', dist: 0.4, wage: 450 },
+      { id: 'j2', enTitle: 'Utensil Washing + Swab', hiTitle: 'बर्तन और पोंछा', employer: 'Patel Family', dist: 0.9, wage: 500 },
+      { id: 'j3', enTitle: 'Full-Day Home Help', hiTitle: 'पूरे दिन का घरेलू काम', employer: 'Sharma Household', dist: 1.1, wage: 600 },
     ],
-    loader:      [
-      { id:'j1', enTitle:'Office Shifting Help',  hiTitle:'ऑफिस शिफ्टिंग हेल्पर', employer:'Quick Movers', dist:4.5, wage:700 },
-      { id:'j2', enTitle:'Warehouse Loading',     hiTitle:'गोदाम लोडिंग', employer:'ABC Logistics', dist:6.0, wage:650 },
-      { id:'j3', enTitle:'Shop Goods Unloading',  hiTitle:'दुकान में सामान उतारना', employer:'Ravi Traders', dist:1.3, wage:600 },
+    loader: [
+      { id: 'j1', enTitle: 'Office Shifting Help', hiTitle: 'ऑफिस शिफ्टिंग हेल्पर', employer: 'Quick Movers', dist: 4.5, wage: 700 },
+      { id: 'j2', enTitle: 'Warehouse Loading', hiTitle: 'गोदाम लोडिंग', employer: 'ABC Logistics', dist: 6.0, wage: 650 },
+      { id: 'j3', enTitle: 'Shop Goods Unloading', hiTitle: 'दुकान में सामान उतारना', employer: 'Ravi Traders', dist: 1.3, wage: 600 },
     ],
-    driver:      [
-      { id:'j1', enTitle:'School Van Driver',       hiTitle:'स्कूल वैन ड्राइवर', employer:'Bright Minds School', dist:2.2, wage:1000 },
-      { id:'j2', enTitle:'Delivery Executive',      hiTitle:'डिलीवरी ड्राइवर', employer:'FastShip Pvt Ltd', dist:0.0, wage:800 },
-      { id:'j3', enTitle:'Commercial Driver (LCV)', hiTitle:'कमर्शियल ड्राइवर', employer:'Sharma Cargo', dist:7.1, wage:1200 },
+    driver: [
+      { id: 'j1', enTitle: 'School Van Driver', hiTitle: 'स्कूल वैन ड्राइवर', employer: 'Bright Minds School', dist: 2.2, wage: 1000 },
+      { id: 'j2', enTitle: 'Delivery Executive', hiTitle: 'डिलीवरी ड्राइवर', employer: 'FastShip Pvt Ltd', dist: 0.0, wage: 800 },
+      { id: 'j3', enTitle: 'Commercial Driver (LCV)', hiTitle: 'कमर्शियल ड्राइवर', employer: 'Sharma Cargo', dist: 7.1, wage: 1200 },
     ],
   };
 
   const WORKERS = {
-    plumber:     [
-      { id:'w1', enName:'Ramesh Kumar',   hiName:'रमेश कुमार',   exp:6, rate:650, rating:4.8, initials:'RK', verified:true },
-      { id:'w2', enName:'Shankar Yadav',  hiName:'शंकर यादव',   exp:3, rate:550, rating:4.3, initials:'SY', verified:true },
-      { id:'w3', enName:'Dinesh Patel',   hiName:'दिनेश पटेल',  exp:9, rate:800, rating:4.9, initials:'DP', verified:false },
+    plumber: [
+      { id: 'w1', enName: 'Ramesh Kumar', hiName: 'रमेश कुमार', exp: 6, rate: 650, rating: 4.8, initials: 'RK', verified: true },
+      { id: 'w2', enName: 'Shankar Yadav', hiName: 'शंकर यादव', exp: 3, rate: 550, rating: 4.3, initials: 'SY', verified: true },
+      { id: 'w3', enName: 'Dinesh Patel', hiName: 'दिनेश पटेल', exp: 9, rate: 800, rating: 4.9, initials: 'DP', verified: false },
     ],
     electrician: [
-      { id:'w1', enName:'Suresh Nair',    hiName:'सुरेश नायर',   exp:8, rate:900, rating:4.7, initials:'SN', verified:true },
-      { id:'w2', enName:'Vinod Sharma',   hiName:'विनोद शर्मा',  exp:4, rate:700, rating:4.1, initials:'VS', verified:true },
-      { id:'w3', enName:'Ajay Mishra',    hiName:'अजय मिश्रा',  exp:12,rate:1100,rating:4.9, initials:'AM', verified:true },
+      { id: 'w1', enName: 'Suresh Nair', hiName: 'सुरेश नायर', exp: 8, rate: 900, rating: 4.7, initials: 'SN', verified: true },
+      { id: 'w2', enName: 'Vinod Sharma', hiName: 'विनोद शर्मा', exp: 4, rate: 700, rating: 4.1, initials: 'VS', verified: true },
+      { id: 'w3', enName: 'Ajay Mishra', hiName: 'अजय मिश्रा', exp: 12, rate: 1100, rating: 4.9, initials: 'AM', verified: true },
     ],
-    carpenter:   [
-      { id:'w1', enName:'Mohan Das',      hiName:'मोहन दास',    exp:14, rate:1000, rating:4.8, initials:'MD', verified:true },
-      { id:'w2', enName:'Raju Singh',     hiName:'राजू सिंह',   exp:5,  rate:750,  rating:4.2, initials:'RS', verified:false },
-      { id:'w3', enName:'Prakash Joshi',  hiName:'प्रकाश जोशी', exp:10, rate:950,  rating:4.6, initials:'PJ', verified:true },
+    carpenter: [
+      { id: 'w1', enName: 'Mohan Das', hiName: 'मोहन दास', exp: 14, rate: 1000, rating: 4.8, initials: 'MD', verified: true },
+      { id: 'w2', enName: 'Raju Singh', hiName: 'राजू सिंह', exp: 5, rate: 750, rating: 4.2, initials: 'RS', verified: false },
+      { id: 'w3', enName: 'Prakash Joshi', hiName: 'प्रकाश जोशी', exp: 10, rate: 950, rating: 4.6, initials: 'PJ', verified: true },
     ],
-    mason:       [
-      { id:'w1', enName:'Bhola Paswan',   hiName:'भोला पासवान', exp:18, rate:1100, rating:4.7, initials:'BP', verified:true },
-      { id:'w2', enName:'Ganesh Meena',   hiName:'गणेश मीना',   exp:7,  rate:850,  rating:4.3, initials:'GM', verified:true },
-      { id:'w3', enName:'Lal Bahadur',    hiName:'लाल बहादुर',  exp:22, rate:1300, rating:5.0, initials:'LB', verified:true },
+    mason: [
+      { id: 'w1', enName: 'Bhola Paswan', hiName: 'भोला पासवान', exp: 18, rate: 1100, rating: 4.7, initials: 'BP', verified: true },
+      { id: 'w2', enName: 'Ganesh Meena', hiName: 'गणेश मीना', exp: 7, rate: 850, rating: 4.3, initials: 'GM', verified: true },
+      { id: 'w3', enName: 'Lal Bahadur', hiName: 'लाल बहादुर', exp: 22, rate: 1300, rating: 5.0, initials: 'LB', verified: true },
     ],
-    painter:     [
-      { id:'w1', enName:'Arjun Rawat',    hiName:'अर्जुन रावत',  exp:5,  rate:750, rating:4.4, initials:'AR', verified:true },
-      { id:'w2', enName:'Sanjay Verma',   hiName:'संजय वर्मा',   exp:11, rate:900, rating:4.8, initials:'SV', verified:true },
-      { id:'w3', enName:'Dev Rathore',    hiName:'देव राठौर',    exp:3,  rate:650, rating:4.0, initials:'DR', verified:false },
+    painter: [
+      { id: 'w1', enName: 'Arjun Rawat', hiName: 'अर्जुन रावत', exp: 5, rate: 750, rating: 4.4, initials: 'AR', verified: true },
+      { id: 'w2', enName: 'Sanjay Verma', hiName: 'संजय वर्मा', exp: 11, rate: 900, rating: 4.8, initials: 'SV', verified: true },
+      { id: 'w3', enName: 'Dev Rathore', hiName: 'देव राठौर', exp: 3, rate: 650, rating: 4.0, initials: 'DR', verified: false },
     ],
-    domestic:    [
-      { id:'w1', enName:'Savita Devi',    hiName:'सविता देवी',   exp:4, rate:450, rating:4.6, initials:'SD', verified:true },
-      { id:'w2', enName:'Kamla Bai',      hiName:'कमला बाई',     exp:9, rate:550, rating:4.9, initials:'KB', verified:true },
-      { id:'w3', enName:'Meena Kumari',   hiName:'मीना कुमारी',  exp:2, rate:400, rating:4.1, initials:'MK', verified:false },
+    domestic: [
+      { id: 'w1', enName: 'Savita Devi', hiName: 'सविता देवी', exp: 4, rate: 450, rating: 4.6, initials: 'SD', verified: true },
+      { id: 'w2', enName: 'Kamla Bai', hiName: 'कमला बाई', exp: 9, rate: 550, rating: 4.9, initials: 'KB', verified: true },
+      { id: 'w3', enName: 'Meena Kumari', hiName: 'मीना कुमारी', exp: 2, rate: 400, rating: 4.1, initials: 'MK', verified: false },
     ],
-    loader:      [
-      { id:'w1', enName:'Santosh Bind',   hiName:'संतोष बिंद',  exp:3, rate:600, rating:4.2, initials:'SB', verified:false },
-      { id:'w2', enName:'Chotu Lal',      hiName:'छोटू लाल',    exp:6, rate:650, rating:4.5, initials:'CL', verified:true },
-      { id:'w3', enName:'Ramprasad Sahu', hiName:'रामप्रसाद साहू', exp:10, rate:700, rating:4.7, initials:'RS', verified:true },
+    loader: [
+      { id: 'w1', enName: 'Santosh Bind', hiName: 'संतोष बिंद', exp: 3, rate: 600, rating: 4.2, initials: 'SB', verified: false },
+      { id: 'w2', enName: 'Chotu Lal', hiName: 'छोटू लाल', exp: 6, rate: 650, rating: 4.5, initials: 'CL', verified: true },
+      { id: 'w3', enName: 'Ramprasad Sahu', hiName: 'रामप्रसाद साहू', exp: 10, rate: 700, rating: 4.7, initials: 'RS', verified: true },
     ],
-    driver:      [
-      { id:'w1', enName:'Mahendra Singh', hiName:'महेंद्र सिंह',  exp:12, rate:1000, rating:4.8, initials:'MS', verified:true },
-      { id:'w2', enName:'Ashok Tiwari',   hiName:'अशोक तिवारी',   exp:7,  rate:850,  rating:4.5, initials:'AT', verified:true },
-      { id:'w3', enName:'Deepak Rao',     hiName:'दीपक राव',      exp:4,  rate:800,  rating:4.0, initials:'DR', verified:false },
+    driver: [
+      { id: 'w1', enName: 'Mahendra Singh', hiName: 'महेंद्र सिंह', exp: 12, rate: 1000, rating: 4.8, initials: 'MS', verified: true },
+      { id: 'w2', enName: 'Ashok Tiwari', hiName: 'अशोक तिवारी', exp: 7, rate: 850, rating: 4.5, initials: 'AT', verified: true },
+      { id: 'w3', enName: 'Deepak Rao', hiName: 'दीपक राव', exp: 4, rate: 800, rating: 4.0, initials: 'DR', verified: false },
     ],
   };
 
@@ -234,40 +234,40 @@ document.addEventListener('DOMContentLoaded', () => {
   // ═══════════════════════════════════════════════════
   const $ = (id) => document.getElementById(id);
 
-  const navbar           = $('dash-navbar');
-  const langEnBtn        = $('lang-en');
-  const langHiBtn        = $('lang-hi');
-  const langSlider       = $('lang-slider');
-  const roleBadge        = $('role-badge');
-  const roleBadgeText    = $('role-badge-text');
-  const logoutBtn        = $('btn-logout');
-  const logoutLabel      = $('logout-label');
-  const locationPill     = $('location-pill');
-  const locationText     = $('location-text');
-  const brandTagline     = $('brand-tagline');
-  const categoryGrid     = $('category-grid');
-  const categoriesSection= $('categories-section');
-  const listingsSection  = $('listings-section');
-  const sectionTitle     = $('section-title');
-  const sectionSubtitle  = $('section-subtitle');
-  const searchInput      = $('category-search');
-  const searchClear      = $('search-clear');
-  const emptyState       = $('empty-state');
-  const emptyStateText   = $('empty-state-text');
-  const btnBack          = $('btn-back');
-  const backLabel        = $('back-label');
-  const listingsGrid     = $('listings-grid');
-  const listingsTitle    = $('listings-title');
+  const navbar = $('dash-navbar');
+  const langEnBtn = $('lang-en');
+  const langHiBtn = $('lang-hi');
+  const langSlider = $('lang-slider');
+  const roleBadge = $('role-badge');
+  const roleBadgeText = $('role-badge-text');
+  const logoutBtn = $('btn-logout');
+  const logoutLabel = $('logout-label');
+  const locationPill = $('location-pill');
+  const locationText = $('location-text');
+  const brandTagline = $('brand-tagline');
+  const categoryGrid = $('category-grid');
+  const categoriesSection = $('categories-section');
+  const listingsSection = $('listings-section');
+  const sectionTitle = $('section-title');
+  const sectionSubtitle = $('section-subtitle');
+  const searchInput = $('category-search');
+  const searchClear = $('search-clear');
+  const emptyState = $('empty-state');
+  const emptyStateText = $('empty-state-text');
+  const btnBack = $('btn-back');
+  const backLabel = $('back-label');
+  const listingsGrid = $('listings-grid');
+  const listingsTitle = $('listings-title');
   const listingsSubtitle = $('listings-subtitle');
-  const listingsCatIcon  = $('listings-cat-icon');
+  const listingsCatIcon = $('listings-cat-icon');
 
   // Location modal
-  const locModalOverlay  = $('location-modal-overlay');
-  const locModalClose    = $('loc-modal-close');
-  const locModalTitle    = $('loc-modal-title');
-  const locationInput    = $('location-input');
-  const btnLocSave       = $('btn-loc-save');
-  const locSaveLabel     = $('loc-save-label');
+  const locModalOverlay = $('location-modal-overlay');
+  const locModalClose = $('loc-modal-close');
+  const locModalTitle = $('loc-modal-title');
+  const locationInput = $('location-input');
+  const btnLocSave = $('btn-loc-save');
+  const locSaveLabel = $('loc-save-label');
 
 
   // ═══════════════════════════════════════════════════
@@ -275,22 +275,22 @@ document.addEventListener('DOMContentLoaded', () => {
   // ═══════════════════════════════════════════════════
   function applyLanguage() {
     const lang = state.language;
-    const t    = T[lang];
+    const t = T[lang];
 
     // Body class for font family
     document.body.classList.toggle('lang-hi', lang === 'HI');
     document.getElementById('html-root').setAttribute('lang', lang === 'HI' ? 'hi' : 'en');
 
-    brandTagline.textContent   = t.brandTagline;
-    sectionTitle.textContent   = t.sectionTitle;
-    sectionSubtitle.textContent= t.sectionSubtitle;
-    searchInput.placeholder    = t.searchPlaceholder;
+    brandTagline.textContent = t.brandTagline;
+    sectionTitle.textContent = t.sectionTitle;
+    sectionSubtitle.textContent = t.sectionSubtitle;
+    searchInput.placeholder = t.searchPlaceholder;
     emptyStateText.textContent = t.emptyState;
-    backLabel.textContent      = t.backBtn;
-    logoutLabel.textContent    = t.logout;
-    locModalTitle.textContent  = t.locModalTitle;
-    locSaveLabel.textContent   = t.locSaveLabel;
-    locationInput.placeholder  = t.locPlaceholder;
+    backLabel.textContent = t.backBtn;
+    logoutLabel.textContent = t.logout;
+    locModalTitle.textContent = t.locModalTitle;
+    locSaveLabel.textContent = t.locSaveLabel;
+    locationInput.placeholder = t.locPlaceholder;
 
     // Role badge
     roleBadgeText.textContent = state.role === 'worker'
@@ -318,12 +318,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Animate slider
     if (lang === 'EN') {
-      langSlider.style.left  = '3px';
+      langSlider.style.left = '3px';
       langSlider.style.width = langEnBtn.offsetWidth + 'px';
       langEnBtn.classList.add('active');
       langHiBtn.classList.remove('active');
     } else {
-      langSlider.style.left  = (langEnBtn.offsetWidth + 3) + 'px';
+      langSlider.style.left = (langEnBtn.offsetWidth + 3) + 'px';
       langSlider.style.width = langHiBtn.offsetWidth + 'px';
       langHiBtn.classList.add('active');
       langEnBtn.classList.remove('active');
@@ -335,7 +335,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Init slider size on load
   function initLangSlider() {
     langSlider.style.width = langEnBtn.offsetWidth + 'px';
-    langSlider.style.left  = '3px';
+    langSlider.style.left = '3px';
   }
 
   langEnBtn.addEventListener('click', () => setLanguage('EN'));
@@ -414,10 +414,10 @@ document.addEventListener('DOMContentLoaded', () => {
   //  HELPERS — Stars renderer
   // ═══════════════════════════════════════════════════
   function renderStars(rating) {
-    const full  = Math.floor(rating);
+    const full = Math.floor(rating);
     const empty = 5 - full;
     let html = '<span class="stars">';
-    for (let i = 0; i < full;  i++) html += '<span class="star-filled">★</span>';
+    for (let i = 0; i < full; i++) html += '<span class="star-filled">★</span>';
     for (let i = 0; i < empty; i++) html += '<span class="star-empty">★</span>';
     html += '</span>';
     return html;
@@ -428,13 +428,13 @@ document.addEventListener('DOMContentLoaded', () => {
   //  CATEGORY GRID RENDER
   // ═══════════════════════════════════════════════════
   function renderCategoryGrid() {
-    const lang  = state.language;
+    const lang = state.language;
     const query = state.searchQuery.toLowerCase().trim();
 
     const filtered = CATEGORIES.filter(cat => {
       if (!query) return true;
       const enMatch = cat.en.title.toLowerCase().includes(query) || cat.en.desc.toLowerCase().includes(query);
-      const hiMatch = cat.hi.title.includes(query)               || cat.hi.desc.includes(query);
+      const hiMatch = cat.hi.title.includes(query) || cat.hi.desc.includes(query);
       return enMatch || hiMatch;
     });
 
@@ -447,9 +447,9 @@ document.addEventListener('DOMContentLoaded', () => {
     emptyState.classList.add('hidden');
 
     categoryGrid.innerHTML = filtered.map((cat, idx) => {
-      const title  = lang === 'EN' ? cat.en.title : cat.hi.title;
-      const desc   = lang === 'EN' ? cat.en.desc  : cat.hi.desc;
-      const badge  = lang === 'EN'
+      const title = lang === 'EN' ? cat.en.title : cat.hi.title;
+      const desc = lang === 'EN' ? cat.en.desc : cat.hi.desc;
+      const badge = lang === 'EN'
         ? T.EN.jobsAvailable(cat.count)
         : T.HI.jobsAvailable(cat.count);
 
@@ -508,8 +508,8 @@ document.addEventListener('DOMContentLoaded', () => {
   // ═══════════════════════════════════════════════════
   function renderListings(catId) {
     const lang = state.language;
-    const t    = T[lang];
-    const cat  = CATEGORIES.find(c => c.id === catId);
+    const t = T[lang];
+    const cat = CATEGORIES.find(c => c.id === catId);
 
     // Update header
     listingsCatIcon.textContent = cat.icon;
@@ -517,20 +517,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (state.role === 'worker') {
       const jobs = JOBS[catId] || [];
-      listingsTitle.textContent    = catTitle + (lang === 'EN' ? ' Jobs' : ' के काम');
+      listingsTitle.textContent = catTitle + (lang === 'EN' ? ' Jobs' : ' के काम');
       listingsSubtitle.textContent = t.jobsNearYou(catTitle, jobs.length);
-      listingsGrid.innerHTML       = jobs.map((job, idx) => renderJobCard(job, t, idx)).join('');
+      listingsGrid.innerHTML = jobs.map((job, idx) => renderJobCard(job, t, idx)).join('');
     } else {
       const workers = WORKERS[catId] || [];
-      listingsTitle.textContent    = catTitle + (lang === 'EN' ? ' Workers' : ' कारीगर');
+      listingsTitle.textContent = catTitle + (lang === 'EN' ? ' Workers' : ' कारीगर');
       listingsSubtitle.textContent = t.workersNearYou(catTitle, workers.length);
-      listingsGrid.innerHTML       = workers.map((w, idx) => renderWorkerCard(w, t, idx)).join('');
+      listingsGrid.innerHTML = workers.map((w, idx) => renderWorkerCard(w, t, idx)).join('');
     }
   }
 
   function renderJobCard(job, t, idx) {
-    const lang    = state.language;
-    const title   = lang === 'EN' ? job.enTitle : job.hiTitle;
+    const lang = state.language;
+    const title = lang === 'EN' ? job.enTitle : job.hiTitle;
     const distStr = job.dist > 0 ? t.distLabel(job.dist) : (lang === 'EN' ? 'Nearby' : 'पास में');
 
     return `
@@ -574,9 +574,9 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function renderWorkerCard(worker, t, idx) {
-    const lang    = state.language;
-    const name    = lang === 'EN' ? worker.enName : worker.hiName;
-    const expStr  = t.expLabel(worker.exp);
+    const lang = state.language;
+    const name = lang === 'EN' ? worker.enName : worker.hiName;
+    const expStr = t.expLabel(worker.exp);
     const rateStr = t.dailyRate(worker.rate);
     const verifiedHTML = worker.verified
       ? `<span class="verified-badge">
