@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const state = {
     language: 'EN',           // 'EN' | 'HI'
     role: 'worker',       // 'worker' | 'employer'
-    location: 'Bengaluru, 560001',
+    location: 'Belagavi, 590016',
     activeCategory: null,     // category id when drawer is open
     searchQuery: '',
   };
