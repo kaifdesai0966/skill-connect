@@ -176,11 +176,12 @@ input {
 }
 
 .dash-brand-name {
-  font-size: 1.3rem;
+  font-size: 1.22rem;
   font-weight: 900;
-  letter-spacing: 3.5px;
+  letter-spacing: 1.5px;
   color: var(--text-white);
   line-height: 1.1;
+  white-space: nowrap;
 }
 
 .dash-brand-tagline {

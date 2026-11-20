@@ -1,5 +1,5 @@
 /* ═══════════════════════════════════════════════════════
-   KAAM — Single-File App State Machine
+   Skill Connect — Single-File App State Machine
    Global state: isLoggedIn | userRole | language
    ═══════════════════════════════════════════════════════ */
 
@@ -10,9 +10,9 @@ document.addEventListener('DOMContentLoaded', () => {
   // ═══════════════════════════════════════════════════
   const appState = {
     isLoggedIn: false,       // false → landing, true → dashboard
-    userRole: 'worker',    // 'worker' | 'employer'
-    language: 'EN',        // 'EN' | 'HI'
-    location: 'Belegavi, 590016',
+    userRole: 'worker',      // 'worker' | 'employer'
+    language: 'EN',          // 'EN' | 'HI'
+    location: 'Bengaluru, 560001',
     activeCategory: null,    // category id when listings drawer is open
     searchQuery: '',
     userName: '',
@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
   // ═══════════════════════════════════════════════════
-  //  LOGIN TRIGGER  (called by both forms on success)
+  //  LOGIN TRIGGER (called by both forms on success)
   // ═══════════════════════════════════════════════════
   function login(role, name) {
     appState.isLoggedIn = true;
@@ -59,7 +59,7 @@ document.addEventListener('DOMContentLoaded', () => {
   function logout() {
     appState.isLoggedIn = false;
     appState.activeCategory = null;
-    appState.language = 'EN';
+    // Note: User's selected language persists seamlessly!
     render();
   }
 
@@ -166,10 +166,92 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
   // ═══════════════════════════════════════════════════
-  //  TRANSLATION DICTIONARY
+  //  BILINGUAL TRANSLATION DICTIONARY (EN & HI)
   // ═══════════════════════════════════════════════════
   const T = {
     EN: {
+      brandName: 'Skill Connect',
+      brandTagline: 'WORK CONNECTED.',
+      navHome: 'Home',
+      navFindJobs: 'Find Jobs',
+      navFindWorkers: 'Find Workers',
+      btnSignin: 'Sign In',
+      btnGetStarted: 'Get Started',
+      heroCategory: 'LOCAL JOB & SKILL MATCHING PORTAL',
+      titleLine1: 'Real Skills.',
+      titleLine2: 'Local Jobs.',
+      titleLine3: 'A Brighter Future.',
+      heroSubtitle: 'Connects unskilled and semi-skilled workers with nearby job opportunities. Find work, hire talent, and build a stronger community.',
+      heroBtnFindJobs: 'Find Jobs',
+      heroBtnFindWorkers: 'Find Workers',
+      heroLocation: 'Nearby opportunities. Real people. Local impact.',
+      heroQuote: 'Skilled Hands<br>Build Stronger<br>Communities',
+
+      // Modal
+      roleWorker: 'Worker',
+      roleEmployer: 'Employer',
+      tabSignin: 'Log In',
+      tabSignup: 'Sign Up / Register',
+      signinRoleWorker: 'Worker Portal',
+      signinRoleEmployer: 'Employer Portal',
+      labelEmail: 'Email ID',
+      phEmail: 'name@example.com',
+      errEmail: 'Please enter a valid email address',
+      labelPassword: 'Password',
+      phPassword: 'Enter your password',
+      forgotPassword: 'Forgot Password?',
+      magicLink: 'Sign in with Magic Link',
+      btnSigninSubmit: 'Log In',
+      signinFooterPrompt: "Don't have an account?",
+      linkToSignup: 'Create one now',
+
+      signupRoleWorker: 'Registering as Worker',
+      signupRoleEmployer: 'Registering as Employer',
+      labelNameWorker: 'Full Name',
+      labelNameEmployer: 'Full Name / Business Name',
+      phNameWorker: 'Enter your full name',
+      phNameEmployer: 'Enter your name or business name',
+      labelCreatePassword: 'Create Password',
+      phCreatePassword: 'Min. 6 characters',
+      labelLocationWorker: 'City / Pincode',
+      labelLocationEmployer: 'Location / Site Address',
+      phLocationWorker: 'Enter area name or 6-digit pincode',
+      phLocationEmployer: 'Enter site address or pincode',
+
+      labelSkill: 'Primary Skill / Work Type',
+      skillDefault: 'Select your primary skill',
+      skillMasonry: 'Masonry',
+      skillPlumbing: 'Plumbing',
+      skillCarpentry: 'Carpentry',
+      skillPainting: 'Painting',
+      skillElectrical: 'Electrical Work',
+      skillConstruction: 'Construction',
+      skillDomestic: 'Domestic Help',
+
+      labelWage: 'Daily Wage Expectation (₹)',
+      wageOptional: 'Optional',
+
+      labelEmployerType: 'Employer Type',
+      empTypeDefault: 'Select employer type',
+      empTypeIndividual: 'Individual / Household',
+      empTypeContractor: 'Contractor',
+      empTypeBusiness: 'Business Owner',
+
+      btnSignupWorker: 'Register as Worker',
+      btnSignupEmployer: 'Register as Employer',
+      signupFooterPrompt: 'Already have an account?',
+      linkToSignin: 'Sign in here',
+
+      // Feedback & Status
+      loggingIn: 'Logging In...',
+      welcomeBack: 'Welcome back!',
+      creatingAccount: 'Creating account...',
+      accountCreated: 'Account Created!',
+      resetSent: 'Reset link sent to your email!',
+      magicSent: 'Magic link sent! Check your inbox',
+      enterEmailFirst: 'Enter your email above first',
+
+      // Dashboard
       sectionTitle: 'Select a Work Category',
       sectionSubtitle: 'Browse verified daily-wage opportunities and skilled professionals near you.',
       searchPH: 'Search categories…',
@@ -188,7 +270,7 @@ document.addEventListener('DOMContentLoaded', () => {
       applyBtn: 'Apply / Call Now',
       hireBtn: 'Hire / Contact',
       dist: (km) => km > 0 ? `${km} km away` : 'Nearby',
-      rate: (a) => `\u20B9${a}/day`,
+      rate: (a) => `₹${a}/day`,
       exp: (y) => `${y} yrs exp.`,
       verified: 'Verified',
       daily: 'Daily Wage',
@@ -196,10 +278,92 @@ document.addEventListener('DOMContentLoaded', () => {
       listWorkerSuffix: ' Workers',
     },
     HI: {
+      brandName: 'स्किल कनेक्ट',
+      brandTagline: 'वर्क कनेक्टेड।',
+      navHome: 'होम',
+      navFindJobs: 'काम खोजें',
+      navFindWorkers: 'कारीगर खोजें',
+      btnSignin: 'साइन इन',
+      btnGetStarted: 'शुरू करें',
+      heroCategory: 'स्थानीय रोजगार और कौशल मिलान पोर्टल',
+      titleLine1: 'असली कौशल।',
+      titleLine2: 'स्थानीय काम।',
+      titleLine3: 'एक उज्जवल भविष्य।',
+      heroSubtitle: 'अकुशल और अर्ध-कुशल कामगारों को नजदीकी रोजगार के अवसरों से जोड़ता है। काम खोजें, कारीगर नियुक्त करें और एक मजबूत समुदाय बनाएं।',
+      heroBtnFindJobs: 'काम खोजें →',
+      heroBtnFindWorkers: 'कारीगर खोजें →',
+      heroLocation: '📍 आस-पास के अवसर। असली लोग। स्थानीय प्रभाव।',
+      heroQuote: 'कुशल हाथ<br>मजबूत समुदाय<br>बनाते हैं',
+
+      // Modal
+      roleWorker: 'कारीगर',
+      roleEmployer: 'नियोक्ता',
+      tabSignin: 'लॉग इन',
+      tabSignup: 'साइन अप / पंजीकरण',
+      signinRoleWorker: 'कारीगर पोर्टल',
+      signinRoleEmployer: 'नियोक्ता पोर्टल',
+      labelEmail: 'ईमेल आईडी',
+      phEmail: 'name@example.com',
+      errEmail: 'कृपया एक वैध ईमेल पता दर्ज करें',
+      labelPassword: 'पासवर्ड',
+      phPassword: 'अपना पासवर्ड दर्ज करें',
+      forgotPassword: 'पासवर्ड भूल गए?',
+      magicLink: 'मैजिक लिंक से साइन इन करें',
+      btnSigninSubmit: 'लॉग इन करें',
+      signinFooterPrompt: 'खाता नहीं है?',
+      linkToSignup: 'नया खाता बनाएं',
+
+      signupRoleWorker: 'कारीगर के रूप में पंजीकरण',
+      signupRoleEmployer: 'नियोक्ता के रूप में पंजीकरण',
+      labelNameWorker: 'पूरा नाम',
+      labelNameEmployer: 'पूरा नाम / व्यापार का नाम',
+      phNameWorker: 'अपना पूरा नाम दर्ज करें',
+      phNameEmployer: 'अपना नाम या व्यापार का नाम दर्ज करें',
+      labelCreatePassword: 'पासवर्ड बनाएं',
+      phCreatePassword: 'न्यूनतम 6 अक्षर',
+      labelLocationWorker: 'शहर / पिनकोड',
+      labelLocationEmployer: 'स्थान / कार्यस्थल का पता',
+      phLocationWorker: 'क्षेत्र का नाम या 6-अंकों का पिनकोड दर्ज करें',
+      phLocationEmployer: 'कार्यस्थल का पता या पिनकोड दर्ज करें',
+
+      labelSkill: 'मुख्य कौशल / काम का प्रकार',
+      skillDefault: 'अपना मुख्य कौशल चुनें',
+      skillMasonry: 'राजमिस्त्री',
+      skillPlumbing: 'प्लंबर',
+      skillCarpentry: 'बढ़ई (कारपेंटर)',
+      skillPainting: 'पेंटर',
+      skillElectrical: 'इलेक्ट्रीशियन',
+      skillConstruction: 'निर्माण कार्य',
+      skillDomestic: 'घरेलू सहायक',
+
+      labelWage: 'दैनिक मजदूरी अपेक्षा (₹)',
+      wageOptional: 'वैकल्पिक',
+
+      labelEmployerType: 'नियोक्ता का प्रकार',
+      empTypeDefault: 'नियोक्ता प्रकार चुनें',
+      empTypeIndividual: 'व्यक्तिगत / घरेलू',
+      empTypeContractor: 'ठेकेदार',
+      empTypeBusiness: 'व्यवसायी',
+
+      btnSignupWorker: 'कारीगर के रूप में पंजीकरण करें',
+      btnSignupEmployer: 'नियोक्ता के रूप में पंजीकरण करें',
+      signupFooterPrompt: 'पहले से खाता है?',
+      linkToSignin: 'यहाँ साइन इन करें',
+
+      // Feedback & Status
+      loggingIn: 'लॉग इन हो रहा है...',
+      welcomeBack: 'स्वागत है!',
+      creatingAccount: 'खाता बन रहा है...',
+      accountCreated: 'खाता सफलतापूर्वक बन गया!',
+      resetSent: 'रीसेट लिंक आपकी ईमेल पर भेजा गया!',
+      magicSent: 'मैजिक लिंक भेज दिया गया! इनबॉक्स चेक करें',
+      enterEmailFirst: 'पहले ऊपर अपना ईमेल दर्ज करें',
+
+      // Dashboard
       sectionTitle: 'काम की श्रेणी चुनें',
       sectionSubtitle: 'अपने पास उपलब्ध दैनिक वेतन के काम और कुशल कारीगर खोजें।',
       searchPH: 'श्रेणी खोजें…',
-      roleBadgeWorker: 'मजदूर',
+      roleBadgeWorker: 'कारीगर',
       roleBadgeEmp: 'नियोक्ता',
       logout: 'लॉग आउट',
       backBtn: '← सभी श्रेणियों पर वापस जाएं',
@@ -214,7 +378,7 @@ document.addEventListener('DOMContentLoaded', () => {
       applyBtn: 'अप्लाई करें / अभी कॉल करें',
       hireBtn: 'हायर करें / संपर्क करें',
       dist: (km) => km > 0 ? `${km} किमी दूर` : 'पास में',
-      rate: (a) => `\u20B9${a}/दिन`,
+      rate: (a) => `₹${a}/दिन`,
       exp: (y) => `${y} साल अनुभव`,
       verified: 'सत्यापित',
       daily: 'दैनिक मजदूरी',
@@ -251,8 +415,8 @@ document.addEventListener('DOMContentLoaded', () => {
               </svg>
             </div>
             <div class="brand-text">
-              <span class="brand-name">Skill Connect </span>
-              <span class="brand-tagline" id="db-tagline">WORK CONNECTED.</span>
+              <span class="brand-name db-brand-name">${lang === 'EN' ? 'SKILL CONNECT' : 'स्किल कनेक्ट'}</span>
+              <span class="brand-tagline" id="db-tagline">${T[lang].brandTagline}</span>
             </div>
           </a>
 
@@ -383,18 +547,18 @@ document.addEventListener('DOMContentLoaded', () => {
     function positionLangSlider() {
       if (appState.language === 'EN') {
         langSlider.style.width = langEnBtn.offsetWidth + 'px';
-        langSlider.style.left = '3px';
+        langSlider.style.left = langEnBtn.offsetLeft + 'px';
         langEnBtn.classList.add('active');
         langHiBtn.classList.remove('active');
       } else {
         langSlider.style.width = langHiBtn.offsetWidth + 'px';
-        langSlider.style.left = (langEnBtn.offsetWidth + 3) + 'px';
+        langSlider.style.left = langHiBtn.offsetLeft + 'px';
         langHiBtn.classList.add('active');
         langEnBtn.classList.remove('active');
       }
     }
 
-    setTimeout(positionLangSlider, 60); // after paint
+    setTimeout(positionLangSlider, 60);
 
     langEnBtn.addEventListener('click', () => {
       if (appState.language === 'EN') return;
@@ -466,9 +630,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const set = (id, val) => { const el = document.getElementById(id); if (el) el.textContent = val; };
 
+    const dbBrandName = document.querySelector('.db-brand-name');
+    if (dbBrandName) dbBrandName.textContent = lang === 'EN' ? 'SKILL CONNECT' : 'स्किल कनेक्ट';
+    set('db-tagline', T[lang].brandTagline);
+
     set('db-sec-title', T[lang].sectionTitle);
     set('db-sec-sub', T[lang].sectionSubtitle);
-    set('db-sec-title', T[lang].sectionTitle);
     set('db-empty-text', T[lang].emptyState);
     set('db-back-label', T[lang].backBtn);
     set('db-logout-label', T[lang].logout);
@@ -657,17 +824,206 @@ document.addEventListener('DOMContentLoaded', () => {
     const linkToSignin = document.getElementById('link-to-signin');
     const workerFields = document.getElementById('worker-fields');
     const empFields = document.getElementById('employer-fields');
-    const signinRoleInd = document.getElementById('signin-role-indicator');
-    const signinRoleLbl = document.getElementById('signin-role-label');
-    const signupRoleInd = document.getElementById('signup-role-indicator');
-    const signupRoleLbl = document.getElementById('signup-role-label');
-    const signupNameLbl = document.getElementById('signup-name-label');
-    const signupLocLbl = document.getElementById('signup-location-label');
-    const btnSignupSub = document.getElementById('btn-signup-submit');
+
     const signinEmail = document.getElementById('signin-email');
     const signupEmail = document.getElementById('signup-email');
     const signinPwd = document.getElementById('signin-password');
     const signupPwd = document.getElementById('signup-password');
+
+    // ── Apply Landing & Modal Language
+    function applyLandingLanguage() {
+      const lang = appState.language;
+      const t = T[lang];
+      const isW = currentRole === 'worker';
+
+      document.body.classList.toggle('lang-hi', lang === 'HI');
+      document.getElementById('html-root').setAttribute('lang', lang === 'HI' ? 'hi' : 'en');
+
+      // Brand
+      const bName = document.getElementById('brand-name');
+      if (bName) bName.textContent = lang === 'EN' ? 'SKILL CONNECT' : 'स्किल कनेक्ट';
+      const bTagline = document.getElementById('brand-tagline');
+      if (bTagline) bTagline.textContent = t.brandTagline;
+
+      // Nav
+      const nHome = document.getElementById('nav-home');
+      if (nHome) nHome.textContent = t.navHome;
+      const nFindJobs = document.getElementById('nav-find-jobs');
+      if (nFindJobs) nFindJobs.textContent = t.navFindJobs;
+      const nFindWorkers = document.getElementById('nav-find-workers');
+      if (nFindWorkers) nFindWorkers.textContent = t.navFindWorkers;
+      const bSignin = document.getElementById('btn-signin');
+      if (bSignin) bSignin.textContent = t.btnSignin;
+      const bStarted = document.getElementById('btn-get-started');
+      if (bStarted) bStarted.textContent = t.btnGetStarted;
+
+      // Hero
+      const hCat = document.getElementById('hero-category');
+      if (hCat) hCat.textContent = t.heroCategory;
+      const t1 = document.getElementById('title-line-1');
+      if (t1) t1.textContent = t.titleLine1;
+      const t2 = document.getElementById('title-line-2');
+      if (t2) t2.textContent = t.titleLine2;
+      const t3 = document.getElementById('title-line-3');
+      if (t3) t3.textContent = t.titleLine3;
+      const hSub = document.getElementById('hero-subtitle');
+      if (hSub) hSub.textContent = t.heroSubtitle;
+      const bFJobsText = document.getElementById('btn-find-jobs-text');
+      if (bFJobsText) bFJobsText.textContent = t.heroBtnFindJobs;
+      const bFWorkersText = document.getElementById('btn-find-workers-text');
+      if (bFWorkersText) bFWorkersText.textContent = t.heroBtnFindWorkers;
+      const hLoc = document.getElementById('hero-location-text');
+      if (hLoc) hLoc.textContent = t.heroLocation;
+      const hQuote = document.getElementById('hero-quote-text');
+      if (hQuote) hQuote.innerHTML = t.heroQuote;
+
+      // Modal role buttons & tabs
+      const rW = document.getElementById('role-text-worker');
+      if (rW) rW.textContent = t.roleWorker;
+      const rE = document.getElementById('role-text-employer');
+      if (rE) rE.textContent = t.roleEmployer;
+      const tSigninEl = document.getElementById('tab-signin');
+      if (tSigninEl) tSigninEl.textContent = t.tabSignin;
+      const tSignupEl = document.getElementById('tab-signup');
+      if (tSignupEl) tSignupEl.textContent = t.tabSignup;
+
+      // Sign In Form
+      const sRoleLbl = document.getElementById('signin-role-label');
+      if (sRoleLbl) sRoleLbl.textContent = isW ? t.signinRoleWorker : t.signinRoleEmployer;
+
+      const lSigninEmail = document.getElementById('label-signin-email');
+      if (lSigninEmail) lSigninEmail.textContent = t.labelEmail;
+      const inSigninEmail = document.getElementById('signin-email');
+      if (inSigninEmail) inSigninEmail.placeholder = t.phEmail;
+      const errSigninEmail = document.getElementById('signin-email-error');
+      if (errSigninEmail) errSigninEmail.textContent = t.errEmail;
+
+      const lSigninPwd = document.getElementById('label-signin-password');
+      if (lSigninPwd) lSigninPwd.textContent = t.labelPassword;
+      const inSigninPwd = document.getElementById('signin-password');
+      if (inSigninPwd) inSigninPwd.placeholder = t.phPassword;
+
+      const bFP = document.getElementById('btn-forgot-password');
+      if (bFP) bFP.textContent = t.forgotPassword;
+      const bML = document.getElementById('btn-magic-link');
+      if (bML) bML.textContent = t.magicLink;
+
+      const bSigninSubText = document.getElementById('btn-signin-submit-text');
+      if (bSigninSubText) bSigninSubText.textContent = t.btnSigninSubmit;
+
+      const sFootPrompt = document.getElementById('signin-footer-prompt');
+      if (sFootPrompt) sFootPrompt.textContent = t.signinFooterPrompt;
+      const lSignup = document.getElementById('link-to-signup');
+      if (lSignup) lSignup.textContent = t.linkToSignup;
+
+      // Sign Up Form
+      const suRoleLbl = document.getElementById('signup-role-label');
+      if (suRoleLbl) suRoleLbl.textContent = isW ? t.signupRoleWorker : t.signupRoleEmployer;
+
+      const suNameLbl = document.getElementById('signup-name-label');
+      if (suNameLbl) suNameLbl.textContent = isW ? t.labelNameWorker : t.labelNameEmployer;
+      const suNameIn = document.getElementById('signup-name');
+      if (suNameIn) suNameIn.placeholder = isW ? t.phNameWorker : t.phNameEmployer;
+
+      const lSignupEmail = document.getElementById('label-signup-email');
+      if (lSignupEmail) lSignupEmail.textContent = t.labelEmail;
+      const inSignupEmail = document.getElementById('signup-email');
+      if (inSignupEmail) inSignupEmail.placeholder = t.phEmail;
+      const errSignupEmail = document.getElementById('signup-email-error');
+      if (errSignupEmail) errSignupEmail.textContent = t.errEmail;
+
+      const lSignupPwd = document.getElementById('label-signup-password');
+      if (lSignupPwd) lSignupPwd.textContent = t.labelCreatePassword;
+      const inSignupPwd = document.getElementById('signup-password');
+      if (inSignupPwd) inSignupPwd.placeholder = t.phCreatePassword;
+
+      const suLocLbl = document.getElementById('signup-location-label');
+      if (suLocLbl) suLocLbl.textContent = isW ? t.labelLocationWorker : t.labelLocationEmployer;
+      const suLocIn = document.getElementById('signup-location');
+      if (suLocIn) suLocIn.placeholder = isW ? t.phLocationWorker : t.phLocationEmployer;
+
+      const lSkill = document.getElementById('label-signup-skill');
+      if (lSkill) lSkill.textContent = t.labelSkill;
+      const oSkillDef = document.getElementById('opt-skill-default');
+      if (oSkillDef) oSkillDef.textContent = t.skillDefault;
+      const oSkillMas = document.getElementById('opt-skill-masonry');
+      if (oSkillMas) oSkillMas.textContent = t.skillMasonry;
+      const oSkillPlu = document.getElementById('opt-skill-plumbing');
+      if (oSkillPlu) oSkillPlu.textContent = t.skillPlumbing;
+      const oSkillCar = document.getElementById('opt-skill-carpentry');
+      if (oSkillCar) oSkillCar.textContent = t.skillCarpentry;
+      const oSkillPai = document.getElementById('opt-skill-painting');
+      if (oSkillPai) oSkillPai.textContent = t.skillPainting;
+      const oSkillEle = document.getElementById('opt-skill-electrical');
+      if (oSkillEle) oSkillEle.textContent = t.skillElectrical;
+      const oSkillCon = document.getElementById('opt-skill-construction');
+      if (oSkillCon) oSkillCon.textContent = t.skillConstruction;
+      const oSkillDom = document.getElementById('opt-skill-domestic');
+      if (oSkillDom) oSkillDom.textContent = t.skillDomestic;
+
+      const lWage = document.getElementById('label-signup-wage');
+      if (lWage && lWage.childNodes[0]) lWage.childNodes[0].textContent = t.labelWage + ' ';
+      const lWageOpt = document.getElementById('label-signup-wage-opt');
+      if (lWageOpt) lWageOpt.textContent = t.wageOptional;
+
+      const lEmpType = document.getElementById('label-signup-employer-type');
+      if (lEmpType) lEmpType.textContent = t.labelEmployerType;
+      const oEmpDef = document.getElementById('opt-emp-default');
+      if (oEmpDef) oEmpDef.textContent = t.empTypeDefault;
+      const oEmpInd = document.getElementById('opt-emp-individual');
+      if (oEmpInd) oEmpInd.textContent = t.empTypeIndividual;
+      const oEmpCon = document.getElementById('opt-emp-contractor');
+      if (oEmpCon) oEmpCon.textContent = t.empTypeContractor;
+      const oEmpBus = document.getElementById('opt-emp-business');
+      if (oEmpBus) oEmpBus.textContent = t.empTypeBusiness;
+
+      const suSubText = document.getElementById('btn-signup-submit-text');
+      if (suSubText) suSubText.textContent = isW ? t.btnSignupWorker : t.btnSignupEmployer;
+
+      const suFootPrompt = document.getElementById('signup-footer-prompt');
+      if (suFootPrompt) suFootPrompt.textContent = t.signupFooterPrompt;
+      const lSignin = document.getElementById('link-to-signin');
+      if (lSignin) lSignin.textContent = t.linkToSignin;
+    }
+
+    // ── Language Toggle on Landing Page
+    const landingLangEn = document.getElementById('landing-lang-en');
+    const landingLangHi = document.getElementById('landing-lang-hi');
+    const landingSlider = document.getElementById('landing-lang-slider');
+
+    function positionLandingSlider() {
+      if (!landingSlider || !landingLangEn || !landingLangHi) return;
+      if (appState.language === 'EN') {
+        landingSlider.style.width = landingLangEn.offsetWidth + 'px';
+        landingSlider.style.left = landingLangEn.offsetLeft + 'px';
+        landingLangEn.classList.add('active');
+        landingLangHi.classList.remove('active');
+      } else {
+        landingSlider.style.width = landingLangHi.offsetWidth + 'px';
+        landingSlider.style.left = landingLangHi.offsetLeft + 'px';
+        landingLangHi.classList.add('active');
+        landingLangEn.classList.remove('active');
+      }
+    }
+
+    if (landingLangEn && landingLangHi) {
+      landingLangEn.addEventListener('click', () => {
+        if (appState.language === 'EN') return;
+        appState.language = 'EN';
+        applyLandingLanguage();
+        positionLandingSlider();
+      });
+      landingLangHi.addEventListener('click', () => {
+        if (appState.language === 'HI') return;
+        appState.language = 'HI';
+        applyLandingLanguage();
+        positionLandingSlider();
+      });
+      setTimeout(positionLandingSlider, 60);
+    }
+
+    // Initialize text on boot
+    applyLandingLanguage();
 
     // Navbar scroll
     window.addEventListener('scroll', () => {
@@ -731,25 +1087,43 @@ document.addEventListener('DOMContentLoaded', () => {
     // Role UI
     function updateRoleUI() {
       const isW = currentRole === 'worker';
+      const t = T[appState.language];
+
       roleBtnW.classList.toggle('active', isW);
       roleBtnE.classList.toggle('active', !isW);
       roleSlider.classList.toggle('employer', !isW);
+
+      const signinRoleInd = document.getElementById('signin-role-indicator');
+      const signinRoleLbl = document.getElementById('signin-role-label');
+      const signupRoleInd = document.getElementById('signup-role-indicator');
+      const signupRoleLbl = document.getElementById('signup-role-label');
+      const signupNameLbl = document.getElementById('signup-name-label');
+      const signupLocLbl = document.getElementById('signup-location-label');
+
       signinRoleInd.classList.toggle('employer', !isW);
-      signinRoleLbl.textContent = isW ? 'Worker Portal' : 'Employer Portal';
+      signinRoleLbl.textContent = isW ? t.signinRoleWorker : t.signinRoleEmployer;
       signupRoleInd.classList.toggle('employer', !isW);
-      signupRoleLbl.textContent = isW ? 'Registering as Worker' : 'Registering as Employer';
+      signupRoleLbl.textContent = isW ? t.signupRoleWorker : t.signupRoleEmployer;
+
       workerFields.classList.toggle('hidden', !isW);
       empFields.classList.toggle('hidden', isW);
-      signupNameLbl.textContent = isW ? 'Full Name' : 'Full Name / Business Name';
-      signupLocLbl.textContent = isW ? 'City / Pincode' : 'Location / Site Address';
-      document.getElementById('signup-name').placeholder = isW ? 'Enter your full name' : 'Enter your name or business name';
-      document.getElementById('signup-location').placeholder = isW ? 'Enter area name or 6-digit pincode' : 'Enter site address or pincode';
+
+      signupNameLbl.textContent = isW ? t.labelNameWorker : t.labelNameEmployer;
+      signupLocLbl.textContent = isW ? t.labelLocationWorker : t.labelLocationEmployer;
+      document.getElementById('signup-name').placeholder = isW ? t.phNameWorker : t.phNameEmployer;
+      document.getElementById('signup-location').placeholder = isW ? t.phLocationWorker : t.phLocationEmployer;
+
       updateSignupBtn();
     }
+
     function updateSignupBtn() {
-      const lbl = currentRole === 'worker' ? 'Register as Worker' : 'Register as Employer';
-      btnSignupSub.innerHTML = `${lbl} <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>`;
+      const isW = currentRole === 'worker';
+      const t = T[appState.language];
+      const lbl = isW ? t.btnSignupWorker : t.btnSignupEmployer;
+      const btnSignupSub = document.getElementById('btn-signup-submit');
+      btnSignupSub.innerHTML = `<span id="btn-signup-submit-text">${lbl}</span> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>`;
     }
+
     roleBtnW.addEventListener('click', () => { if (currentRole !== 'worker') { currentRole = 'worker'; updateRoleUI(); } });
     roleBtnE.addEventListener('click', () => { if (currentRole !== 'employer') { currentRole = 'employer'; updateRoleUI(); } });
 
@@ -789,6 +1163,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // ── SIGN IN SUBMIT → triggers login()
     formSignin.addEventListener('submit', (e) => {
       e.preventDefault();
+      const t = T[appState.language];
       if (!validateEmail(signinEmail, 'signin-email-error') || !signinEmail.value.trim()) {
         signinEmail.closest('.input-group').classList.add('error');
         document.getElementById('signin-email-error').classList.add('visible');
@@ -796,15 +1171,14 @@ document.addEventListener('DOMContentLoaded', () => {
       }
       const btn = document.getElementById('btn-signin-submit');
       btn.classList.add('loading');
-      btn.innerHTML = `${spinner} Logging In...`;
+      btn.innerHTML = `${spinner} ${t.loggingIn}`;
 
       setTimeout(() => {
         btn.classList.remove('loading');
         btn.classList.add('success');
-        btn.innerHTML = `${successIcon} Welcome back!`;
+        btn.innerHTML = `${successIcon} ${t.welcomeBack}`;
         btn.style.background = 'linear-gradient(135deg,#059669,#10B981)';
 
-        // ── KEY STEP: set isLoggedIn = true, render dashboard
         setTimeout(() => {
           closeModal();
           login(currentRole, signinEmail.value.split('@')[0]);
@@ -815,6 +1189,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // ── SIGN UP SUBMIT → triggers login()
     formSignup.addEventListener('submit', (e) => {
       e.preventDefault();
+      const t = T[appState.language];
       if (!validateEmail(signupEmail, 'signup-email-error') || !signupEmail.value.trim()) {
         signupEmail.closest('.input-group').classList.add('error');
         document.getElementById('signup-email-error').classList.add('visible');
@@ -822,15 +1197,14 @@ document.addEventListener('DOMContentLoaded', () => {
       }
       const btn = document.getElementById('btn-signup-submit');
       btn.classList.add('loading');
-      btn.innerHTML = `${spinner} Creating account...`;
+      btn.innerHTML = `${spinner} ${t.creatingAccount}`;
 
       setTimeout(() => {
         btn.classList.remove('loading');
         btn.classList.add('success');
-        btn.innerHTML = `${successIcon} Account Created!`;
+        btn.innerHTML = `${successIcon} ${t.accountCreated}`;
         btn.style.background = 'linear-gradient(135deg,#059669,#10B981)';
 
-        // ── KEY STEP: set isLoggedIn = true, render dashboard
         setTimeout(() => {
           closeModal();
           const nameInput = document.getElementById('signup-name');
@@ -843,13 +1217,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const btnFP = document.getElementById('btn-forgot-password');
     const btnML = document.getElementById('btn-magic-link');
     function flashBtn(btn, successMsg, originalMsg) {
+      const t = T[appState.language];
       const email = signinEmail.value.trim();
       if (email && emailRegex.test(email)) { btn.textContent = successMsg; btn.style.color = '#10B981'; }
-      else { btn.textContent = 'Enter your email above first'; btn.style.color = '#EF4444'; signinEmail.focus(); }
+      else { btn.textContent = t.enterEmailFirst; btn.style.color = '#EF4444'; signinEmail.focus(); }
       setTimeout(() => { btn.textContent = originalMsg; btn.style.color = ''; }, 2500);
     }
-    btnFP.addEventListener('click', () => flashBtn(btnFP, 'Reset link sent!', 'Forgot Password?'));
-    btnML.addEventListener('click', () => flashBtn(btnML, 'Magic link sent! Check your inbox', 'Sign in with Magic Link'));
+    btnFP.addEventListener('click', () => flashBtn(btnFP, T[appState.language].resetSent, T[appState.language].forgotPassword));
+    btnML.addEventListener('click', () => flashBtn(btnML, T[appState.language].magicSent, T[appState.language].magicLink));
   }
 
 

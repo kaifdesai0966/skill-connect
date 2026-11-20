@@ -1,5 +1,5 @@
 /* ═══════════════════════════════════════════════════════
-   KAAM — Interactive Modal & State Management (Email Based)
+   Skill Connect — Interactive Modal & State Management (Email Based)
    ═══════════════════════════════════════════════════════ */
 
 document.addEventListener('DOMContentLoaded', () => {

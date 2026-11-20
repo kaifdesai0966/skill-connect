@@ -50,7 +50,8 @@ document.addEventListener('DOMContentLoaded', () => {
       expLabel: (y) => `${y} yrs exp.`,
     },
     HI: {
-      brandTagline: 'काम कनेक्टेड.',
+      brandName: 'स्किल कनेक्ट',
+      brandTagline: 'वर्क कनेक्टेड.',
       locationLabel: state.location,
       sectionTitle: 'काम की श्रेणी चुनें',
       sectionSubtitle: 'अपने पास उपलब्ध दैनिक वेतन के काम और कुशल कारीगर खोजें।',

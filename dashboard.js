@@ -26,6 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // ═══════════════════════════════════════════════════
   const T = {
     EN: {
+      brandName: 'Skill Connect',
       brandTagline: 'WORK CONNECTED.',
       locationLabel: state.location,
       sectionTitle: 'Select a Work Category',
@@ -50,7 +51,8 @@ document.addEventListener('DOMContentLoaded', () => {
       expLabel: (y) => `${y} yrs exp.`,
     },
     HI: {
-      brandTagline: 'काम कनेक्टेड.',
+      brandName: 'स्किल कनेक्ट',
+      brandTagline: 'वर्क कनेक्टेड.',
       locationLabel: state.location,
       sectionTitle: 'काम की श्रेणी चुनें',
       sectionSubtitle: 'अपने पास उपलब्ध दैनिक वेतन के काम और कुशल कारीगर खोजें।',
@@ -281,6 +283,8 @@ document.addEventListener('DOMContentLoaded', () => {
     document.body.classList.toggle('lang-hi', lang === 'HI');
     document.getElementById('html-root').setAttribute('lang', lang === 'HI' ? 'hi' : 'en');
 
+    const brandNameEl = document.querySelector('.dash-brand-name');
+    if (brandNameEl) brandNameEl.textContent = lang === 'EN' ? 'SKILL CONNECT' : 'स्किल कनेक्ट';
     brandTagline.textContent = t.brandTagline;
     sectionTitle.textContent = t.sectionTitle;
     sectionSubtitle.textContent = t.sectionSubtitle;
